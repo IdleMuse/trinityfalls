@@ -1,0 +1,28 @@
+<?php
+
+namespace DummyNamespace;
+
+use NamespacedDummyUserModel;
+use NamespacedDummyModel;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class DummyClass
+{
+    use HandlesAuthorization;
+
+    public function view(DummyUser $user, DummyModel $dummyModel){
+        //
+    }
+
+    public function create(DummyUser $user){
+        //
+    }
+
+    public function update(DummyUser $user, DummyModel $dummyModel){
+        //
+    }
+
+    public function delete(DummyUser $user, DummyModel $dummyModel){
+        //
+    }
+}
