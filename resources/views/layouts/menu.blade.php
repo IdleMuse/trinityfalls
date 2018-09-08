@@ -8,14 +8,29 @@
                 {{-- <span class="sr-only">(current)</span> --}}
             </a>
         </li>
-        @can('create', App\User::class)
+        @if(Auth::user()->is_admin)
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="users"></span>
                     Users
                 </a>
             </li>
-        @endcan        
+        @endif
+        @if(Auth::user()->is_admin)
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('characters.index')}}">
+                    <span data-feather="clipboard"></span>
+                    Characters
+                </a>
+            </li>
+        @else
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('characters.show',Auth::user()->active_character)}}">
+                    <span data-feather="clipboard"></span>
+                    {{Auth::user()->active_character->name}}
+                </a>
+            </li>
+        @endif
     </ul>
 
     {{-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
