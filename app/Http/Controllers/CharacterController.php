@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CharacterController extends Controller
 {
     public function __construct(){
-        // $this->authorizeResource(Character::class);
+        $this->authorizeResource(Character::class);
     }
 
     public function index(){
