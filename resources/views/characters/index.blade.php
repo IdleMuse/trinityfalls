@@ -28,7 +28,7 @@
                     <td>{{$character->name}}</td>
                     <td>{{$character->user->name}}</td>
                     <td>{{ucfirst($character->status)}}</td>
-                    <td></td>
+                    <td><i class="text-muted">(not tracking)</i></td>
                     <td>
                         <a href="{{route('characters.show',$character)}}">View</a> |
                         <a href="{{route('characters.edit',$character)}}">Edit</a> |

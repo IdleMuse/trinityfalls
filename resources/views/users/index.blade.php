@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2">
         <h1>Users</h1>
-        <button class="btn btn-sm btn-outline-secondary">Create New User</button>
+        <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#create-user-modal">Create New User</button>
     </div>
     <table class="table">
         <thead>
@@ -23,7 +23,7 @@
                     <td>{{ucfirst($user->role)}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{optional($user->active_character)->name}}</td>
-                    <td></td>
+                    <td><i class="text-muted">(not tracking)</i></td>
                     <td>
                         <a href="{{route('users.edit',$user)}}">Edit</a>
                     </td>
@@ -31,4 +31,5 @@
             @endforeach
         </tbody>
     </table>
+    @include('users.modals.create')
 @endsection
