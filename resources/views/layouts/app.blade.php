@@ -4,25 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{ config('app.name','Laravel')}}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{asset('js/app.js')}}" defer></script>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{ config('app.name', 'Laravel') }}</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{route('home')}}">{{config('app.name','Laravel')}}</a>
         {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Log out</a>
-            </li>
-        </ul>
+        @auth
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <form class="inline-form" method="POST" action="{{route('logout')}}">
+                        @csrf
+                        <button class="btn btn-link nav-link" type="submit">Log Out</button>
+                    </form>
+                </li>
+            </ul>
+        @endauth
     </nav>
     <div class="container-fluid" id="app">
         @auth

@@ -10,6 +10,8 @@ class UserController extends Controller
 {
     public function index(){
         abort_unless(Auth::user()->is_admin, 403);
+        $users = User::all();
+        return view('users.index')->with('users',$users);
     }
 
     public function store(Request $request){

@@ -2,7 +2,7 @@
     <ul class="nav flex-column">
         {{-- <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{route('home')}}">Trinity Falls</a> --}}
         <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" href="{{route('home')}}">
                 <span data-feather="home"></span>
                 Dashboard
                 {{-- <span class="sr-only">(current)</span> --}}
@@ -10,7 +10,7 @@
         </li>
         @if(Auth::user()->is_admin)
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('users.index')}}">
                     <span data-feather="users"></span>
                     Users
                 </a>

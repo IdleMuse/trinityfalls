@@ -14,6 +14,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/', 'SiteNavigationController@index')->name('home');
 
-    Route::resource('characters', 'CharacterController')->except(["destroy"]);
+    Route::resource('users', 'UserController')->only(['index', 'store', 'edit', 'update']);
+    Route::resource('characters', 'CharacterController')->except(['destroy']);
 
 });
