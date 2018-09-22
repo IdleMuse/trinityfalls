@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')    
+@section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom mb-3">
         <h1>
             @if(Auth::user()->is($user))
@@ -64,10 +64,11 @@
                 </div>
             @endforeach
             <div class="form-group">
-                <a href="#" class="btn btn-primary">Create character</a>
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create-character-modal">Create character</a>
             </div>
         </div>
     </div>
+    @include('characters.modals.create')
 @endsection
 
 @push('scripts')
