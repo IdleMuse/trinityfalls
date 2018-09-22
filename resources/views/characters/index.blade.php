@@ -24,11 +24,11 @@
         </thead>
         <tbody>
             @foreach($characters as $character)
-                <tr class="status-{{$characer->status}}">
+                <tr class="status-{{$character->status}}">
                     <td>{{$character->name}}</td>
                     <td>{{$character->user->name}}</td>
                     <td>{{ucfirst($character->status)}}</td>
-                    <td><i class="text-muted">(not tracking)</i></td>
+                    <td><i class="text-muted">(work in progress)</i></td>
                     <td>
                         <a href="{{route('characters.show',$character)}}">View</a> |
                         <a href="{{route('characters.edit',$character)}}">Edit</a> |

@@ -60,11 +60,11 @@
             <h2 class="h3 mb-4">Characters</h2>
             @foreach($characters as $character)
                 <div class="px-3 py-3 border-bottom">
-                    <a href="{{route('characters.show',$character)}}">{{$character->name}}</a>
+                    <a href="{{route('characters.show',$character)}}">{{$character->name}}</a><i class="text-muted float-right">{{$character->status}}</i>
                 </div>
             @endforeach
             @can('create',"App\Character")
-                <div class="form-group">
+                <div class="form-group my-3">
                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create-character-modal">Create character</a>
                 </div>
             @endcan

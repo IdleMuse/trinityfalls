@@ -31,14 +31,15 @@ class CharacterController extends Controller
             "name" => 'required|string|unique:characters,name',
             "user_id" => 'required|integer|exists:users,id'
         ]);
-        
-        $user = Character::create($fields);
+        $fields['status'] = "active";
 
-        return redirect()->route('users.edit',$user);
+        $character = Character::create($fields);
+
+        return redirect()->route('characters.show',$character);
     }
 
     public function show(Character $character){
-        //
+        return view('characters.show')->with('character', $character);
     }
 
     public function edit(Character $character){
