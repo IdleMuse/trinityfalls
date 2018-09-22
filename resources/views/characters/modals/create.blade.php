@@ -23,8 +23,8 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="name-field" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control" id="name-field" name="name" required placeholder="(required)">
+                        <label for="character-name-field" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="character-name-field" name="name" required placeholder="(required)">
                     </div>
                 </div>
                 <div class="modal-footer">
