@@ -63,9 +63,11 @@
                     <a href="{{route('characters.show',$character)}}">{{$character->name}}</a>
                 </div>
             @endforeach
-            <div class="form-group">
-                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create-character-modal">Create character</a>
-            </div>
+            @can('create',"App\Character")
+                <div class="form-group">
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#create-character-modal">Create character</a>
+                </div>
+            @endcan
         </div>
     </div>
     @include('characters.modals.create')
