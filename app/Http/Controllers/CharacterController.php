@@ -26,10 +26,6 @@ class CharacterController extends Controller
         return view('characters.index')->with('characters', $characters);
     }
 
-    public function create(){
-        //
-    }
-
     public function store(Request $request){
         //
     }
