@@ -27,7 +27,14 @@ class CharacterController extends Controller
     }
 
     public function store(Request $request){
-        //
+        $fields = $request->validate([
+            "name" => 'required|string|unique:characters,name',
+            "user_id" => 'required|integer|exists:users,id'
+        ]);
+        
+        $user = Character::create($fields);
+
+        return redirect()->route('users.edit',$user);
     }
 
     public function show(Character $character){

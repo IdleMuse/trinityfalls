@@ -11,11 +11,11 @@
                 @csrf
                 <div class="modal-body">
                     @if(!empty($user))
-                        <input type="hidden" name="user" value="{{$user->id}}">
+                        <input type="hidden" name="user_id" value="{{$user->id}}">
                     @else
                         <div class="form-group">
                             <label for="user-field" class="col-form-label">User:</label>
-                            <select class="form-control" id="user-field" name="user" required>
+                            <select class="form-control" id="user-field" name="user_id" required>
                                 @foreach($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
