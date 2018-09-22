@@ -17,6 +17,7 @@
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{route('home')}}">{{config('app.name','Laravel')}}</a>
+        <span class="navbar-text">{{env('APP_DEBUG',false) && !empty($errors) && count($errors)>0 ? $errors : ""}}</span>
         {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
         @auth
             <ul class="navbar-nav px-3">
