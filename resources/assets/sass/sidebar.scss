@@ -1,11 +1,7 @@
-body {
-  font-size: .875rem;
-}
-
 .feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
+  width: $font-size-base / 1.2;
+  height: $font-size-base / 1.2;
+  // vertical-align: text-bottom;
 }
 
 /*
