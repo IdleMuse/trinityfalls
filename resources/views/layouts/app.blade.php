@@ -17,8 +17,11 @@
         <span class="navbar-text">{{env('APP_DEBUG',false) && !empty($errors) && count($errors)>0 ? $errors : ""}}</span>
         {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
         @auth
-            <ul class="navbar-nav px-3">
-                <li class="nav-item text-nowrap">
+            <ul class="navbar-nav flex-row px-2">
+                <li class="nav-item text-nowrap px-3">
+                    <a href="{{route('users.edit',Auth::user())}}" class="btn btn-link nav-link">{{Auth::user()->name}}</a>
+                </li>
+                <li class="nav-item text-nowrap px-3">
                     <form class="inline-form" method="POST" action="{{route('logout')}}">
                         @csrf
                         <button class="btn btn-link nav-link" type="submit">Log Out</button>
