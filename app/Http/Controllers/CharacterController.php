@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Character;
 use Auth;
+use DB;
 
 class CharacterController extends Controller
 {
@@ -35,7 +36,13 @@ class CharacterController extends Controller
     }
 
     public function show(Character $character){
-        return view('characters.show')->with('character', $character);
+        $statuses = DB::table('statuses')->get();
+        $waves = DB::table('waves')->get();
+        return view('characters.show')->with([
+            'character' => $character,
+            'statuses' => $statuses,
+            'waves' => $waves
+        ]);
     }
 
     public function update(Request $request, Character $character){
@@ -44,7 +51,10 @@ class CharacterController extends Controller
             "description" => 'sometimes|nullable|string',
             "background" => 'sometimes|nullable|string',
             "ref_notes" => 'sometimes|nullable|string',
-            "mies" => 'sometimes|nullable|string'
+            "mies" => 'sometimes|nullable|string',
+            "status" => 'sometimes|nullable|string|exists:statuses,key',
+            "wave" => 'sometimes|nullable|string|exists:waves,key',
+            "age" => 'sometimes|nullable|integer|min:0|max:65535'
         ]);
 
         $character->fill($fields)->save();

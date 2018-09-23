@@ -26,7 +26,7 @@
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{ucfirst($character->status)}}
                     @is_admin
-                        <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                        <a href="#" class="float-right font-weight-normal" data-toggle="modal" data-target="#edit-status-modal">Edit <span data-feather="edit"></span></a>
                     @endis_admin
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{$character->age}}
                     @is_admin
-                        <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                        <a href="#" class="float-right font-weight-normal edit-number" data-field="age" data-value="{{$character->age}}">Edit <span data-feather="edit"></span></a>
                     @endis_admin
                 </div>
             </div>
@@ -72,7 +72,7 @@
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{ucwords($character->wave)}}
                     @is_admin
-                        <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                        <a href="#" class="float-right font-weight-normal" data-toggle="modal" data-target="#edit-wave-modal">Edit <span data-feather="edit"></span></a>
                     @endis_admin
                 </div>
             </div>
@@ -132,8 +132,8 @@
     </div>
     @include('characters.modals.edit-text')
     @include('characters.modals.edit-textarea')
-    {{-- @include('characters.modals.edit-status') --}}
-    {{-- @include('characters.modals.edit-wave') --}}
+    @include('characters.modals.edit-status')
+    @include('characters.modals.edit-wave')
 @endsection
 
 @push('scripts')
@@ -143,6 +143,20 @@
             var field = $(this).data('field');
             var value = $(this).data('value');
             $('.fieldname').html(ucfirst(field));
+            $('.fieldinput').attr('type','text');
+            $('.fieldinput').attr('name',field);
+            $('.fieldinput').val(value);
+            $('#edit-text-modal').modal('show');
+        });
+
+        $('.edit-number').click(function(e){
+            var field = $(this).data('field');
+            var value = $(this).data('value');
+            $('.fieldname').html(ucfirst(field));
+            $('.fieldinput').attr('type','number');
+            $('.fieldinput').attr('min',0);
+            $('.fieldinput').attr('max',65535);
+            $('.fieldinput').attr('step',1);
             $('.fieldinput').attr('name',field);
             $('.fieldinput').val(value);
             $('#edit-text-modal').modal('show');
