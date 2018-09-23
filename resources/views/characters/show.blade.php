@@ -6,14 +6,15 @@
             {{$character->name}}
         </h1>
         @can('update', $character)
-            <a href="{{route('characters.edit', $character)}}" class="btn btn-sm btn-outline-secondary">Edit Character</a>
+            <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+            {{-- <a href="{{route('characters.edit', $character)}}" class="btn btn-sm btn-outline-secondary">Edit Character</a> --}}
         @endcan
     </div>
     <div class="row border-bottom mx-0 mb-3 pb-3">
         <div class="col-12">
             <h2 class="h3 mb-4">Details</h2>
         </div>
-        <div class="col-4">
+        <div class="col-4 px-4 border-right">
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Player</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
@@ -24,6 +25,7 @@
                 <label class="col-sm-3 col-form-label">Status</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{ucfirst($character->status)}}
+                    <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
                 </div>
             </div>
             <div class="form-group row">
@@ -33,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-4 px-4 border-right">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Personal Health Pool</label>
                 <div class="col-sm-8 col-form-label font-weight-bold">
@@ -53,37 +55,43 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-4 px-4">
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Age</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{$character->age}}
+                    <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Wave</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{ucwords($character->wave)}}
+                    <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
                 </div>
             </div>
         </div>
     </div>
-    @if(Auth::user()->is_admin)
+    @is_admin
         <div class="row border-bottom mx-0 mb-3 pb-3">
             <div class="col-12">
                 <div class="form-group">
                     <label class="text-danger">Ref Notes</label>
+                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
                     <p class="font-weight-bold">
                         {{nl2br($character->ref_notes)}}
                     </p>
                 </div>
             </div>
         </div>
-    @endif
+    @endis_admin
     <div class="row border-bottom mx-0 mb-3 pb-3">
         <div class="col-12">
             <div class="form-group">
                 <label>Description</label>
+                @can('update', $character)
+                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+                @endcan
                 <p class="font-weight-bold">
                     {{nl2br($character->description)}}
                 </p>
@@ -94,6 +102,9 @@
         <div class="col-12">
             <div class="form-group">
                 <label>Background</label>
+                @can('update', $character)
+                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+                @endcan
                 <p class="font-weight-bold">
                     {{nl2br($character->background)}}
                 </p>
@@ -104,6 +115,9 @@
         <div class="col-12">
             <div class="form-group">
                 <label>Major Incursion Events witnessed</label>
+                @can('update', $character)
+                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+                @endcan
                 <p class="font-weight-bold">
                     {{nl2br($character->mies)}}
                 </p>
