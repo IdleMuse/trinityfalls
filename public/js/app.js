@@ -13698,6 +13698,10 @@ module.exports = __webpack_require__(36);
 
 __webpack_require__(12);
 
+function ucfirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 /***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {

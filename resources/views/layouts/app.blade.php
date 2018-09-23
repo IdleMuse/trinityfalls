@@ -56,7 +56,11 @@
     <script src="{{asset('js/app.js')}}"></script>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
-        feather.replace()
+        feather.replace();
+
+        function ucfirst(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
     </script>
     @stack('scripts')
 </body>

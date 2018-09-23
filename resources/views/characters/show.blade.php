@@ -6,7 +6,7 @@
             {{$character->name}}
         </h1>
         @can('update', $character)
-            <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+            <a href="#" class="float-right edit-text" data-field="name" data-value="{{$character->name}}">Edit <span data-feather="edit"></span></a>
             {{-- <a href="{{route('characters.edit', $character)}}" class="btn btn-sm btn-outline-secondary">Edit Character</a> --}}
         @endcan
     </div>
@@ -25,7 +25,9 @@
                 <label class="col-sm-3 col-form-label">Status</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{ucfirst($character->status)}}
-                    <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                    @is_admin
+                        <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                    @endis_admin
                 </div>
             </div>
             <div class="form-group row">
@@ -60,14 +62,18 @@
                 <label class="col-sm-3 col-form-label">Age</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{$character->age}}
-                    <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                    @is_admin
+                        <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                    @endis_admin
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Wave</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
                     {{ucwords($character->wave)}}
-                    <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                    @is_admin
+                        <a href="#" class="float-right font-weight-normal">Edit <span data-feather="edit"></span></a>
+                    @endis_admin
                 </div>
             </div>
         </div>
@@ -89,9 +95,9 @@
         <div class="col-12">
             <div class="form-group">
                 <label>Description</label>
-                @can('update', $character)
+                @is_admin
                     <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
-                @endcan
+                @endis_admin
                 <p class="font-weight-bold">
                     {{nl2br($character->description)}}
                 </p>
@@ -102,9 +108,9 @@
         <div class="col-12">
             <div class="form-group">
                 <label>Background</label>
-                @can('update', $character)
+                @is_admin
                     <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
-                @endcan
+                @endis_admin
                 <p class="font-weight-bold">
                     {{nl2br($character->background)}}
                 </p>
@@ -115,13 +121,33 @@
         <div class="col-12">
             <div class="form-group">
                 <label>Major Incursion Events witnessed</label>
-                @can('update', $character)
+                @is_admin
                     <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
-                @endcan
+                @endis_admin
                 <p class="font-weight-bold">
                     {{nl2br($character->mies)}}
                 </p>
             </div>
         </div>
     </div>
+    @include('characters.modals.edit-text')
+    {{-- @include('characters.modal.edit-textfield')
+    @include('characters.modal.edit-status')
+    @include('characters.modal.edit-wave') --}}
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+    $(function(){
+        $('.edit-text').click(function(e){
+            console.log('clicked');
+            var field = $(this).data('field');
+            var value = $(this).data('value');
+            $('.fieldname').html(ucfirst(field));
+            $('.fieldinput').attr('name',field);
+            $('.fieldinput').val(value);
+            $('#edit-text-modal').modal('show');
+        });
+    });
+    </script>
+@endpush

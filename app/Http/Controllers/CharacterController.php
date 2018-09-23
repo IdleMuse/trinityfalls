@@ -16,11 +16,7 @@ class CharacterController extends Controller
         if(Auth::user()->is_admin){
             $characters = Character::all();
         } else {
-            // if(Auth::user()->characters()->count() == 1){
-            //     return redirect()->route('characters.show', Auth::user()->characters()->firstOrFail());
-            // } else {
-                $characters = Auth::user()->characters;
-            // }
+            $characters = Auth::user()->characters;
         }
 
         return view('characters.index')->with('characters', $characters);
@@ -42,11 +38,13 @@ class CharacterController extends Controller
         return view('characters.show')->with('character', $character);
     }
 
-    public function edit(Character $character){
-        //
-    }
-
     public function update(Request $request, Character $character){
-        //
+        $fields = $request->validate([
+            "name" => 'sometimes|nullable|string|unique:characters,name,'.$character->id.',id',
+        ]);
+
+        $character->fill($fields)->save();
+
+        return back()->with('success', 'Character updated');
     }
 }
