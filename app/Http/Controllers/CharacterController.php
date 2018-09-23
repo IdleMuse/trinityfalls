@@ -16,11 +16,11 @@ class CharacterController extends Controller
         if(Auth::user()->is_admin){
             $characters = Character::all();
         } else {
-            if(Auth::user()->characters()->count() == 1){
-                return redirect()->route('characters.show', Auth::user()->characters()->firstOrFail());
-            } else {
+            // if(Auth::user()->characters()->count() == 1){
+            //     return redirect()->route('characters.show', Auth::user()->characters()->firstOrFail());
+            // } else {
                 $characters = Auth::user()->characters;
-            }
+            // }
         }
 
         return view('characters.index')->with('characters', $characters);

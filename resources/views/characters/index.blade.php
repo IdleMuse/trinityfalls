@@ -30,8 +30,7 @@
                     <td>{{ucfirst($character->status)}}</td>
                     <td><i class="text-muted">(work in progress)</i></td>
                     <td>
-                        <a href="{{route('characters.show',$character)}}">View</a> |
-                        <a href="{{route('characters.edit',$character)}}">Edit</a> |
+                        <a href="{{route('characters.show',$character)}}">View/Edit Details</a> |
                         <a href="{{route('characters.show',$character)}}">Downtimes</a>
                     </td>
                 </tr>
