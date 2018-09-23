@@ -83,9 +83,9 @@
             <div class="col-12">
                 <div class="form-group">
                     <label class="text-danger">Ref Notes</label>
-                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
-                    <p class="font-weight-bold">
-                        {{nl2br($character->ref_notes)}}
+                    <a href="#" class="float-right edit-textarea" data-field="ref_notes" data-value="{{$character->ref_notes}}">Edit <span data-feather="edit"></span></a>
+                    <p class="font-weight-bold px-2">
+                        {!!nl2br($character->ref_notes)!!}
                     </p>
                 </div>
             </div>
@@ -96,10 +96,10 @@
             <div class="form-group">
                 <label>Description</label>
                 @is_admin
-                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+                    <a href="#" class="float-right edit-textarea" data-field="description" data-value="{{$character->description}}">Edit <span data-feather="edit"></span></a>
                 @endis_admin
-                <p class="font-weight-bold">
-                    {{nl2br($character->description)}}
+                <p class="font-weight-bold px-2">
+                    {!!nl2br($character->description)!!}
                 </p>
             </div>
         </div>
@@ -109,10 +109,10 @@
             <div class="form-group">
                 <label>Background</label>
                 @is_admin
-                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+                    <a href="#" class="float-right edit-textarea" data-field="background" data-value="{{$character->background}}">Edit <span data-feather="edit"></span></a>
                 @endis_admin
-                <p class="font-weight-bold">
-                    {{nl2br($character->background)}}
+                <p class="font-weight-bold px-2">
+                    {!!nl2br($character->background)!!}
                 </p>
             </div>
         </div>
@@ -122,31 +122,39 @@
             <div class="form-group">
                 <label>Major Incursion Events witnessed</label>
                 @is_admin
-                    <a href="#" class="float-right">Edit <span data-feather="edit"></span></a>
+                    <a href="#" class="float-right edit-textarea" data-field="mies" data-value="{{$character->mies}}">Edit <span data-feather="edit"></span></a>
                 @endis_admin
-                <p class="font-weight-bold">
-                    {{nl2br($character->mies)}}
+                <p class="font-weight-bold px-2">
+                    {!!nl2br($character->mies)!!}
                 </p>
             </div>
         </div>
     </div>
     @include('characters.modals.edit-text')
-    {{-- @include('characters.modal.edit-textfield')
-    @include('characters.modal.edit-status')
-    @include('characters.modal.edit-wave') --}}
+    @include('characters.modals.edit-textarea')
+    {{-- @include('characters.modals.edit-status') --}}
+    {{-- @include('characters.modals.edit-wave') --}}
 @endsection
 
 @push('scripts')
     <script type="text/javascript">
     $(function(){
         $('.edit-text').click(function(e){
-            console.log('clicked');
             var field = $(this).data('field');
             var value = $(this).data('value');
             $('.fieldname').html(ucfirst(field));
             $('.fieldinput').attr('name',field);
             $('.fieldinput').val(value);
             $('#edit-text-modal').modal('show');
+        });
+
+        $('.edit-textarea').click(function(e){
+            var field = $(this).data('field');
+            var value = $(this).data('value');
+            $('.fieldname').html(ucfirst(field));
+            $('.fieldinput').attr('name',field);
+            $('.fieldinput').val(value);
+            $('#edit-textarea-modal').modal('show');
         });
     });
     </script>

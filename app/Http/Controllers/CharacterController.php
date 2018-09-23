@@ -41,6 +41,10 @@ class CharacterController extends Controller
     public function update(Request $request, Character $character){
         $fields = $request->validate([
             "name" => 'sometimes|nullable|string|unique:characters,name,'.$character->id.',id',
+            "description" => 'sometimes|nullable|string',
+            "background" => 'sometimes|nullable|string',
+            "ref_notes" => 'sometimes|nullable|string',
+            "mies" => 'sometimes|nullable|string'
         ]);
 
         $character->fill($fields)->save();
