@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             @foreach($characters as $character)
-                <tr class="status-{{$character->status}}">
+                <tr class="character-row -{{$character->status}}">
                     <td>{{$character->name}}</td>
                     <td>{{$character->user->name}}</td>
                     <td>{{ucfirst($character->status)}}</td>
@@ -38,3 +38,19 @@
         </tbody>
     </table>
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        $(function(){
+            $('#show_active').click(function(){
+                
+                $('.character-row').hide();
+                $('.status-active').show();
+            });
+
+            $('#show_all').click(function(){
+                $('.character-row').show();
+            });
+        });
+    </script>
+@endpush
