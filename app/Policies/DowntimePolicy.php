@@ -26,8 +26,9 @@ class DowntimePolicy
 
     public function update(User $user, Downtime $downtime){
         return
+            $downtime->downtimeperiod->is_open &&
             $downtime->character->user->is($user) &&
-            $downtime->downtimeperiod->is_open;
+            $downtime->character->is_active;
     }
 
     public function delete(User $user, Downtime $downtime){

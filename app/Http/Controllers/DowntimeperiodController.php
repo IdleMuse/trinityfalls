@@ -30,6 +30,10 @@ class DowntimeperiodController extends Controller
         return back()->with('success', 'Downtime Period created!');
     }
 
+    public function show(Downtimeperiod $downtimeperiod){
+        return view('downtime_periods.show')->with("period", $downtimeperiod);
+    }
+
     public function edit(Downtimeperiod $downtimeperiod){
         return view('downtime_periods.edit')->with("period", $downtimeperiod);
     }

@@ -15,4 +15,8 @@ class Character extends Model
     public function downtimes(){
         return $this->hasMany('App\Downtime');
     }
+
+    public function getIsActiveAttribute(){
+        return $this->status == "active";
+    }
 }

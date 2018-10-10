@@ -15,9 +15,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/', 'SiteNavigationController@index')->name('home');
 
     Route::resource('users', 'UserController')->only(['index', 'store', 'edit', 'update']);
-    Route::resource('characters', 'CharacterController')->except(['create', 'edit', 'destroy']);
+    Route::resource('characters', 'CharacterController')->only(['index', 'store', 'show', 'update']);
 
-    Route::resource('downtimeperiods', 'DowntimeperiodController')->except(['create', 'show', 'destroy']);
-    Route::resource('downtimes', 'DowntimeController')->except(['create', 'destroy']);
-    Route::resource('downtimepoints', 'DowntimepointController')->except(['create', 'edit', 'destroy']);
+    Route::resource('downtimeperiods', 'DowntimeperiodController')->only(['index', 'store', 'show', 'edit', 'update']);;
+    Route::resource('downtimes', 'DowntimeController')->only(['store', 'show', 'edit']);
+    Route::resource('downtimepoints', 'DowntimepointController')->only(['store', 'show', 'edit', 'update']);
 });
+
+// only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

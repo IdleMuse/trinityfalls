@@ -12,23 +12,22 @@ class DowntimeController extends Controller
         $this->authorizeResource(Downtime::class);
     }
 
-    public function index(){
-        //
-    }
-
     public function store(Request $request){
-        //
+        $data = $request->validate([
+            "character_id" => "required|integer|exists:characters,id",
+            "downtimeperiod_id" => "required|integer|exists:downtimeperiods,id"
+        ]);
+
+        $downtime = Downtime::create($data);
+
+        return back()->with('success', 'Downtime created!');
     }
 
     public function show(Downtime $downtime){
-        //
+        return view('downtime.show')->with('downtime', $downtime);
     }
 
     public function edit(Downtime $downtime){
-        //
-    }
-
-    public function update(Request $request, Downtime $downtime){
-        //
+        return view('downtime.edit')->with('downtime', $downtime);
     }
 }
