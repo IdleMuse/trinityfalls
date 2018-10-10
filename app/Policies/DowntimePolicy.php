@@ -17,18 +17,20 @@ class DowntimePolicy
     }
 
     public function view(User $user, Downtime $downtime){
-
+        return $downtime->character->user->is($user);
     }
 
     public function create(User $user){
-
+        return true;
     }
 
     public function update(User $user, Downtime $downtime){
-
+        return
+            $downtime->character->user->is($user) &&
+            $downtime->downtimeperiod->is_open;
     }
 
     public function delete(User $user, Downtime $downtime){
-        
+        return $user->is_admin;
     }
 }

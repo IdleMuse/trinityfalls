@@ -13,7 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        \App\Character::class => \App\Policies\CharacterPolicy::class,
+        "App\Downtimeperiod" => "App\Policies\DowntimeperiodPolicy",
+        "App\Downtime" => "App\Policies\DowntimePolicy",
+        "App\Downtimepoint" => "App\Policies\DowntimepointPolicy",
     ];
 
     /**
