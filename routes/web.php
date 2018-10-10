@@ -17,7 +17,7 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('users', 'UserController')->only(['index', 'store', 'edit', 'update']);
     Route::resource('characters', 'CharacterController')->except(['create', 'edit', 'destroy']);
 
-    Route::resource('downtimeperiods', 'DowntimeperiodController')->except(['create', 'edit', 'destroy']);
+    Route::resource('downtimeperiods', 'DowntimeperiodController')->except(['create', 'show', 'destroy']);
     Route::resource('downtimes', 'DowntimeController')->except(['create', 'destroy']);
     Route::resource('downtimepoints', 'DowntimepointController')->except(['create', 'edit', 'destroy']);
 });
