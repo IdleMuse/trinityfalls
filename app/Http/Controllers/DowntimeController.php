@@ -24,10 +24,18 @@ class DowntimeController extends Controller
     }
 
     public function show(Downtime $downtime){
-        return view('downtime.show')->with('downtime', $downtime);
+        $showresponses = $downtime->downtimeperiod->is_released;
+        return view('downtimes.show')->with([
+            'downtime' => $downtime,
+            'showresponses' => $showresponses
+        ]);
     }
 
     public function edit(Downtime $downtime){
-        return view('downtime.edit')->with('downtime', $downtime);
+        $showresponses = Auth::user()->is_admin;
+        return view('downtimes.edit')->with([
+            'downtime' => $downtime,
+            'showresponses' => $showresponses
+        ]);
     }
 }

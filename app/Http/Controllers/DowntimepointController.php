@@ -15,9 +15,9 @@ class DowntimepointController extends Controller
     public function store(Request $request){
         $data = $request->validate([
             'downtime_id' => 'required|integer|exists:downtimes,id',
-            'order' => 'required|integer|min:0'
         ]);
 
+        $data['order'] = Downtimepoint::where('downtime_id',$data['downtime_id'])->max('order') + 1;
         $downtimepoint = Downtimepoint::create($data);
 
         return back()->with('success', 'Downtime point added');
