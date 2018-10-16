@@ -20,7 +20,7 @@ class DowntimeController extends Controller
 
         $downtime = Downtime::create($data);
 
-        return back()->with('success', 'Downtime created!');
+        return redirect()->route('downtimes.edit', $downtime)->with('success', 'Downtime created!');
     }
 
     public function show(Downtime $downtime){

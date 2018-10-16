@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Character;
+use App\Downtimeperiod;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 class CharacterController extends Controller
 {
@@ -38,10 +40,19 @@ class CharacterController extends Controller
     public function show(Character $character){
         $statuses = DB::table('statuses')->get();
         $waves = DB::table('waves')->get();
+
+        $now = Carbon::now();
+        $downtimepoints = Downtimeperiod::all()->filter(function($dtp) use ($now){
+            return $now->gt($dtp->opens_at);
+        })->each(function($dtp) use ($character){
+            $dtp->downtime = $character->downtimes()->where('downtimeperiod_id', $dtp->id)->first();
+        });
+        
         return view('characters.show')->with([
             'character' => $character,
             'statuses' => $statuses,
-            'waves' => $waves
+            'waves' => $waves,
+            'periods' => $downtimepoints
         ]);
     }
 

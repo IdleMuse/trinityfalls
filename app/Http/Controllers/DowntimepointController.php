@@ -18,8 +18,11 @@ class DowntimepointController extends Controller
         ]);
 
         $data['order'] = Downtimepoint::where('downtime_id',$data['downtime_id'])->max('order') + 1;
-        $downtimepoint = Downtimepoint::create($data);
+        if($data['order'] > 10){
+            return back()->with('error', 'Max Downtime points reached');
+        }
 
+        $downtimepoint = Downtimepoint::create($data);
         return back()->with('success', 'Downtime point added');
     }
 
