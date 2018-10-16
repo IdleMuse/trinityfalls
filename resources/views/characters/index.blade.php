@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
         <h1>Characters</h1>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-sm btn-outline-secondary">
@@ -43,7 +43,7 @@
     <script type="text/javascript">
         $(function(){
             $('#show_active').click(function(){
-                
+
                 $('.character-row').hide();
                 $('.status-active').show();
             });

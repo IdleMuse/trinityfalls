@@ -2,7 +2,7 @@
     <ul class="nav flex-column">
         {{-- <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{route('home')}}">Trinity Falls</a> --}}
         <li class="nav-item">
-            <a class="nav-link active" href="{{route('home')}}">
+            <a class="nav-link {{Request::is('/') ? 'active' : ''}}" href="{{route('home')}}">
                 <span data-feather="home"></span>
                 Dashboard
                 {{-- <span class="sr-only">(current)</span> --}}
@@ -10,23 +10,29 @@
         </li>
         @is_admin
             <li class="nav-item">
-                <a class="nav-link" href="{{route('users.index')}}">
+                <a class="nav-link {{ Request::is('users') || Request::is('users/*') ? 'active' : '' }}" href="{{route('users.index')}}">
                     <span data-feather="users"></span>
                     Users
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('downtimeperiods') || Request::is('downtimeperiods/*') ? 'active' : '' }}" href="{{route('downtimeperiods.index')}}">
+                    <span data-feather="clock"></span>
+                    Downtime Periods
                 </a>
             </li>
         @endis_admin
         @is_admin
             <li class="nav-item">
-                <a class="nav-link" href="{{route('characters.index')}}">
-                    <span data-feather="clipboard"></span>
+                <a class="nav-link {{ Request::is('characters') || Request::is('characters/*') ? 'active' : '' }}" href="{{route('characters.index')}}">
+                    <span data-feather="github"></span>
                     Characters
                 </a>
             </li>
         @else
             <li class="nav-item">
                 @if(!empty(Auth::user()->active_character))
-                    <a class="nav-link" href="{{route('characters.show',Auth::user()->active_character)}}">
+                    <a class="nav-link {{ Request::is('characters') || Request::is('characters/*') ? 'active' : '' }}" href="{{route('characters.show',Auth::user()->active_character)}}">
                         <span data-feather="clipboard"></span>
                         {{Auth::user()->active_character->name}}
                     </a>

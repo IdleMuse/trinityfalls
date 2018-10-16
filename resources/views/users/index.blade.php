@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
         <h1>Users</h1>
         <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#create-user-modal">Create New User</button>
     </div>

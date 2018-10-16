@@ -29,4 +29,14 @@ class Downtimeperiod extends Model
         $now = Carbon::now();
         return $now->gt($this->releases_at);
     }
+
+    public function getStatusAttribute(){
+        $now = Carbon::now();
+        switch(true){
+            case $now->gt($this->releases_at): return "released";
+            case $now->gt($this->closes_at): return "closed";
+            case $now->gt($this->opens_at): return "open";
+            default: return "not open yet";
+        }
+    }
 }
