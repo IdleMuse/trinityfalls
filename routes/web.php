@@ -19,7 +19,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('downtimeperiods', 'DowntimeperiodController')->only(['index', 'store', 'show', 'edit', 'update']);;
     Route::resource('downtimes', 'DowntimeController')->only(['store', 'show', 'edit']);
-    Route::resource('downtimepoints', 'DowntimepointController')->only(['store', 'show', 'edit', 'update']);
+    Route::resource('downtimepoints', 'DowntimepointController')->only(['store', 'show', 'edit', 'update', 'destroy']);
 });
 
 // only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

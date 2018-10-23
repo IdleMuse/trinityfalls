@@ -54,4 +54,12 @@ class DowntimepointController extends Controller
 
         return back()->with('success', 'Downtime point updated');
     }
+
+    public function destroy(Downtimepoint $downtimepoint){
+        $downtime = $downtimepoint->downtime;
+        $order = $downtimepoint->order;
+        $downtimepoint->delete();
+        $downtime->reorder($order);
+        return back()->with('success', 'Downtime point deleted');
+    }
 }

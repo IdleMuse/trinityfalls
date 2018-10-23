@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
         <h1>Downtime for {{$downtime->character->name}}</h1>
-        <span>Downtime opened at: {{$downtime->downtimeperiod->opens_at}}</span>
+        <span>Downtime opened at: {{$downtime->downtimeperiod->opens_at->format('d/m/y - g:ia')}}</span>
     </div>
     <div class="container pt-4">
         @forelse($downtime->downtimepoints as $point)
@@ -26,7 +26,7 @@
             </div>
         @endforelse
         @can('update', $downtime)
-            <a href="{{route('downtimes.edit', $downtime)}}" class="btn btn-primary">Edit Downtime</a>
+            <a href="{{route('downtimes.edit', $downtime)}}" class="btn btn-primary mb-5">Edit Downtime</a>
         @endcan
     </div>
 @endsection

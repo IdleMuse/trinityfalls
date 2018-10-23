@@ -17,6 +17,10 @@ class Downtime extends Model
     }
 
     public function downtimepoints(){
-        return $this->hasMany('App\Downtimepoint');
+        return $this->hasMany('App\Downtimepoint')->orderBy('order');
+    }
+
+    public function reorder($removed){
+        $this->downtimepoints()->where("order", ">", $removed)->decrement('order');
     }
 }

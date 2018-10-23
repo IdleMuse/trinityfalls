@@ -29,6 +29,6 @@ class DowntimepointPolicy
     }
 
     public function delete(User $user, Downtimepoint $downtimepoint){
-        return $user->is_admin;
+        return $user->can('update', $downtimepoint);
     }
 }

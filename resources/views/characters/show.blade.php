@@ -155,9 +155,9 @@
                 <tbody>
                     @foreach($periods as $period)
                         <tr>
-                            <td>{{$period->opens_at}}</td>
-                            <td>{{$period->closes_at}}</td>
-                            <td>{{$period->releases_at}}</td>
+                            <td>{{$period->opens_at->format('d/m/y - g:ia')}}</td>
+                            <td>{{$period->closes_at->format('d/m/y - g:ia')}}</td>
+                            <td>{{$period->releases_at->format('d/m/y - g:ia')}}</td>
                             <td class="font-weight-bold">{{!empty($period->downtime) ? $period->downtime->downtimepoints()->count() : ""}}</td>
                             <td>
                                 @if(empty($period->downtime))

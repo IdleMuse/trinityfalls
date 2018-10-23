@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
         <h1>Downtime in this Period</h1>
-        <span>Downtime opened at: {{$period->opens_at}}</span>
+        <span>Downtime opened at: {{$period->opens_at->format('d/m/y - g:ia')}}</span>
     </div>
     <table class="table" style="width: 50%">
         <thead>
