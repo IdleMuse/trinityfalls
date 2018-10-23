@@ -20,6 +20,10 @@ class Downtime extends Model
         return $this->hasMany('App\Downtimepoint')->orderBy('order');
     }
 
+    public function getResponsesCountAttribute(){
+        return $this->downtimepoints()->whereNotNull('response')->count();
+    }
+
     public function reorder($removed){
         $this->downtimepoints()->where("order", ">", $removed)->decrement('order');
     }
