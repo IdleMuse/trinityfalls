@@ -16,17 +16,21 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ Request::is('characters') || Request::is('characters/*') ? 'active' : '' }}" href="{{route('characters.index')}}">
+                    <span data-feather="github"></span>
+                    Characters
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('downtimeperiods') || Request::is('downtimeperiods/*') ? 'active' : '' }}" href="{{route('downtimeperiods.index')}}">
                     <span data-feather="clock"></span>
                     Downtime Periods
                 </a>
             </li>
-        @endis_admin
-        @is_admin
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('characters') || Request::is('characters/*') ? 'active' : '' }}" href="{{route('characters.index')}}">
-                    <span data-feather="github"></span>
-                    Characters
+                <a class="nav-link {{ Request::is('menulinks') ? 'active' : '' }}" href="{{route('menulinks.index')}}">
+                    <span data-feather="link"></span>
+                    Menu Links
                 </a>
             </li>
         @else
@@ -44,6 +48,14 @@
                 @endif
             </li>
         @endis_admin
+        @foreach(App\Menulink::all() as $menulink)
+            <li class="nav-item">
+                <a class="nav-link" href="{{$menulink->url}}" target="_blank">
+                    <span data-feather="{{$menulink->display_icon}}"></span>
+                    {{$menulink->name}}
+                </a>
+            </li>
+        @endforeach
     </ul>
 
     {{-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">

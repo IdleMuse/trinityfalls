@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
         "App\Downtimeperiod" => "App\Policies\DowntimeperiodPolicy",
         "App\Downtime" => "App\Policies\DowntimePolicy",
         "App\Downtimepoint" => "App\Policies\DowntimepointPolicy",
+        "App\Menulink" => "App\Policies\MenulinkPolicy",
     ];
 
     /**

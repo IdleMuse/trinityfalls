@@ -14,6 +14,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/', 'SiteNavigationController@index')->name('home');
 
+    Route::resource('menulinks', 'MenulinkController')->only(['index', 'store', 'update', 'destroy']);
+
     Route::resource('users', 'UserController')->only(['index', 'store', 'edit', 'update']);
     Route::resource('characters', 'CharacterController')->only(['index', 'store', 'show', 'update']);
 
