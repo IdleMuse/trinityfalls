@@ -20,15 +20,16 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->boolean('is_admin')->default(false);
+            $table->string('role');
+            $table->foreign('role')->references('key')->on('roles');
             $table->rememberToken();
         });
 
         DB::table('users')->insert([
-            'name' => "Admin",
+            'name' => "Justin Dee",
             'email' => "idlemuse@ghostlit.co.uk",
             'password' => Hash::make("password"),
-            'is_admin' => true
+            'role' => 'admin'
         ]);
     }
 

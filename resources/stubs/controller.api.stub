@@ -4,6 +4,7 @@ namespace DummyNamespace;
 
 use Illuminate\Http\Request;
 use DummyRootNamespaceHttp\Controllers\Controller;
+use Auth;
 
 class DummyClass extends Controller
 {

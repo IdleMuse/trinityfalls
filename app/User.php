@@ -9,21 +9,24 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $guarded = ['id'];
+    protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function getIsAdminAttribute(){
+        return $this->role == "admin";
+    }
+
+    public function characters(){
+        return $this->hasMany("App\Character");
+    }
+
+    public function getActiveCharacterAttribute(){
+        return $this->characters()->where('status','active')->first();
+    }
+
+    public function getWordcountAttribute(){
+        return $this->characters->reduce(function($carry, $ch){
+            return $carry + $ch->wordcount;
+        }, 0);
+    }
 }
