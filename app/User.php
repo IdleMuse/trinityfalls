@@ -23,4 +23,10 @@ class User extends Authenticatable
     public function getActiveCharacterAttribute(){
         return $this->characters()->where('status','active')->first();
     }
+
+    public function getWordcountAttribute(){
+        return $this->characters->reduce(function($carry, $ch){
+            return $carry + $ch->wordcount;
+        }, 0);
+    }
 }

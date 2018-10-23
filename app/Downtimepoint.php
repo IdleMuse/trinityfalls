@@ -11,4 +11,12 @@ class Downtimepoint extends Model
     public function downtime(){
         return $this->belongsTo('App\Downtime');
     }
+
+    public function getWordcountAttribute(){
+        return str_word_count($this->text);
+    }
+
+    public function getResponseWordcountAttribute(){
+        return str_word_count($this->response);
+    }
 }

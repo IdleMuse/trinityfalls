@@ -38,5 +38,5 @@ class Downtimeperiod extends Model
             case $now->gt($this->opens_at): return "open";
             default: return "not open yet";
         }
-    }
+    }    
 }

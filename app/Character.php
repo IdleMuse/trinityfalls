@@ -19,4 +19,10 @@ class Character extends Model
     public function getIsActiveAttribute(){
         return $this->status == "active";
     }
+
+    public function getWordcountAttribute(){
+        return $this->downtimes->reduce(function($carry, $dt){
+            return $carry + $dt->wordcount;
+        }, 0);
+    }
 }
