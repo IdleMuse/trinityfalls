@@ -6,9 +6,9 @@
     </div>
     <p class="lead text-center">
         @is_admin
-            Across <span class="font-weight-bold">{{$count}}</span> downtimes, you have collectively written <span class="font-weight-bold text-primary">{{$wordcount}}</span> {{str_plural('word', $wordcount)}} of downtime responses.
+            Across <span class="font-weight-bold">{{number_format($count)}}</span> downtimes, you have collectively written <span class="font-weight-bold text-primary">{{number_format($wordcount)}}</span> {{str_plural('word', $wordcount)}} of downtime responses.
         @else
-            Across <span class="font-weight-bold">{{$count}}</span> {{str_plural('character', $count)}}, you have written <span class="font-weight-bold text-primary">{{$wordcount}}</span> {{str_plural('word', $wordcount)}} of downtimes.
+            Across <span class="font-weight-bold">{{number_format($count)}}</span> {{str_plural('character', $count)}}, you have written <span class="font-weight-bold text-primary">{{number_format($wordcount)}}</span> {{str_plural('word', $wordcount)}} of downtimes.
         @endis_admin
     </p>
     @if(!Auth::user()->is_admin && empty(Auth::user()->active_character))
