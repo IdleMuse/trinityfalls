@@ -8,6 +8,10 @@ use Auth;
 
 class XpdeltaController extends Controller
 {
+    public function __construct(){
+        $this->authorizeResource(Xpdelta::class);
+    }
+
     public function index(){
         //
     }
@@ -32,6 +36,7 @@ class XpdeltaController extends Controller
     }
 
     public function destroy(Xpdelta $xpdelta){
-        //
+        $xpdelta->delete();
+        return back()->with('success', 'Deleted!');
     }
 }

@@ -81,6 +81,7 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
             <a class="nav-item nav-link" id="nav-downtimes-tab" data-toggle="tab" href="#nav-downtimes" role="tab" aria-controls="nav-downtimes" aria-selected="false">Downtimes</a>
+            <a class="nav-item nav-link" id="nav-xp-tab" data-toggle="tab" href="#nav-xp" role="tab" aria-controls="nav-xp" aria-selected="false">XP</a>
             <a class="nav-item nav-link disabled" id="nav-abilities-tab" data-toggle="tab" href="#nav-abilities" role="tab" aria-controls="nav-abilities" aria-selected="false" disabled>Abilities</a>
             <a class="nav-item nav-link disabled" id="nav-inventory-tab" data-toggle="tab" href="#nav-inventory" role="tab" aria-controls="nav-inventory" aria-selected="false" disabled>Inventory</a>
         </div>
@@ -169,6 +170,38 @@
                                 @else
                                     <a href="{{route('downtimes.show', $period->downtime)}}" class="btn btn-primary">View Downtime</a>
                                 @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade py-4" id="nav-xp" role="tabpanel" aria-labelledby="nav-xp-tab">
+            <table class="table" style="width: 60%">
+                <thead>
+                    <tr>
+                        <th style="width: 20%">Submitted at</th>
+                        <th style="width: 10%">XP Change</th>
+                        <th style="width: 20%">Pays for</th>
+                        <th style="width: 30%">Note</th>
+                        <th style="width: 20%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($character->xpdeltas as $xp)
+                        <tr>
+                            <td>{{$xp->created_at->format('d/m/y - g:ia')}}</td>
+                            <td class="font-weight-bold">{{$xp->delta}}</td>
+                            <td>{!! !empty($xp->purchaseable) ? $purchaseable : "<i class='text-muted'>(n/a)</i>" !!}</td>
+                            <td>{!!nl2br($xp->note)!!}</td>
+                            <td>
+                                @can('delete', $xp)
+                                    <form action="{{route('xpdeltas.destroy', $xp)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
