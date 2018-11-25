@@ -18,7 +18,7 @@
                 <th style="width: 16.66%">Name</th>
                 <th style="width: 16.66%">Player</th>
                 <th style="width: 16.66%">Status</th>
-                <th style="width: 16.66%">XP/Spent</th>
+                <th style="width: 16.66%">XP available / Spent</th>
                 <th style="width: 33.33%">Actions</th>
             </tr>
         </thead>
@@ -28,7 +28,7 @@
                     <td>{{$character->name}}</td>
                     <td>{{$character->user->name}}</td>
                     <td>{{ucfirst($character->status)}}</td>
-                    <td><i class="text-muted">(work in progress)</i></td>
+                    <td>{{$character->xp}} / {{$character->xp_spent}}</td>
                     <td>
                         <a href="{{route('characters.show',$character)}}">View Details</a>
                     </td>

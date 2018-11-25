@@ -7,13 +7,9 @@
         </h1>
         @can('update', $character)
             <a href="#" class="float-right edit-text" data-field="name" data-value="{{$character->name}}">Edit <span data-feather="edit"></span></a>
-            {{-- <a href="{{route('characters.edit', $character)}}" class="btn btn-sm btn-outline-secondary">Edit Character</a> --}}
         @endcan
     </div>
     <div class="row border-bottom mx-0 mb-3 pb-3">
-        {{-- <div class="col-12">
-            <h2 class="h3 mb-4">Details</h2>
-        </div> --}}
         <div class="col-4 px-4 border-right">
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Player</label>
@@ -33,7 +29,10 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">XP</label>
                 <div class="col-sm-9 col-form-label font-weight-bold">
-                    (Work in Progress)
+                    {{$character->xp_gained}} gained, {{$character->xp_spent}} spent, {{$character->xp}} available
+                    @is_admin
+                        <a href="#" class="float-right font-weight-normal" data-toggle="modal" data-target="#add-xp-modal">Add <span data-feather="plus-square"></span></a>
+                    @endis_admin
                 </div>
             </div>
         </div>
@@ -181,6 +180,7 @@
     @include('characters.modals.edit-textarea')
     @include('characters.modals.edit-status')
     @include('characters.modals.edit-wave')
+    @include('characters.modals.add-xp')
 @endsection
 
 @push('scripts')

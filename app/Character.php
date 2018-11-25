@@ -16,6 +16,22 @@ class Character extends Model
         return $this->hasMany('App\Downtime');
     }
 
+    public function xpdeltas(){
+        return $this->hasMany('App\Xpdelta');
+    }
+
+    public function getXpAttribute(){
+        return $this->xpdeltas()->sum('delta');
+    }
+
+    public function getXpGainedAttribute(){
+        return $this->xpdeltas()->where('delta','>',0)->sum('delta');
+    }
+
+    public function getXpSpentAttribute(){
+        return abs($this->xpdeltas()->where('delta','<',0)->sum('delta'));
+    }
+
     public function getIsActiveAttribute(){
         return $this->status == "active";
     }
