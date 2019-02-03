@@ -16,8 +16,6 @@
                         <label for="delta-field" class="col-form-label">Amount to add/remove:</label>
                         <input class="form-control" id="delta-field" type="number" name="delta" value=0 step=1 min=-999 max=999 required>
                     </div>
-                </div>
-                <div class="modal-body">
                     <div class="form-group">
                         <label for="note-field" class="col-form-label">Add a note to this XP:</label>
                         <textarea class="form-control fieldinput" rows="3" id="note-field" name="note"></textarea>

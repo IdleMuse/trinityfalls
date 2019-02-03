@@ -29,7 +29,7 @@ class Character extends Model
     }
 
     public function getXpSpentAttribute(){
-        return abs($this->xpdeltas()->where('delta','<',0)->sum('delta'));
+        return -($this->xpdeltas()->where('delta','<',0)->sum('delta'));
     }
 
     public function getIsActiveAttribute(){

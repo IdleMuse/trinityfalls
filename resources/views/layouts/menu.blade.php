@@ -28,6 +28,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ Request::is('xpdeltas') || Request::is('xpdeltas/*') ? 'active' : '' }}" href="{{route('xpdeltas.index')}}">
+                    <span data-feather="zap"></span>
+                    XP
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('menulinks') ? 'active' : '' }}" href="{{route('menulinks.index')}}">
                     <span data-feather="link"></span>
                     Menu Links
