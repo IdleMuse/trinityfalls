@@ -31,6 +31,38 @@ class SkillController extends Controller
 
         $skill = Skill::create($fields);
 
+        if($skill->is_simple_skill){
+            $skill->skillranks()->create([
+                "rank" => 1,
+                "xp_cost" => 1,
+                "is_hidden" => false
+            ]);
+        } else {
+            $skill->skillranks()->createMany([
+                [
+                    "rank" => 1,
+                    "xp_cost" => 3,
+                    "is_hidden" => false
+                ],[
+                    "rank" => 2,
+                    "xp_cost" => 4,
+                    "is_hidden" => false
+                ],[
+                    "rank" => 3,
+                    "xp_cost" => 5,
+                    "is_hidden" => false
+                ],[
+                    "rank" => 4,
+                    "xp_cost" => 7,
+                    "is_hidden" => true
+                ],[
+                    "rank" => 5,
+                    "xp_cost" => 10,
+                    "is_hidden" => true
+                ]
+            ]);
+        }
+
         return redirect()->route('skills.show',$skill)->with('success', 'Skill created!');
     }
 

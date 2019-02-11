@@ -44,10 +44,10 @@
                 @csrf
                 <input type="hidden" name="skill_id" value="{{$skill->id}}">
                 <div class="col-1">
-                    <input type="number" class="form-control" name="rank" value=0 min=0 step=1 max=99>
+                    <input type="number" class="form-control" name="rank" min=0 step=1 max=99 required>
                 </div>
                 <div class="col-1">
-                    <input type="number" class="form-control" name="xp_cost" value=0 min=0 step=1 max=99>
+                    <input type="number" class="form-control" name="xp_cost" min=0 step=1 max=99 required>
                 </div>
                 <div class="col-6">
                     <textarea class="form-control" name="description" rows=3></textarea>
