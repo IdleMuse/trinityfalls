@@ -30,11 +30,31 @@
                     </div>
                     <div class="col-2">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{route('skills.show', $skill)}}" class="btn btn-outline-primary ml-1">View Levels</a>
+                        <a href="{{route('skills.show', $skill)}}" class="btn btn-outline-primary ml-1">View Ranks</a>
                     </div>
                 </div>
             </form>
         @else
+            <div class="row pb-3">
+                <div class="col-2">
+                    {{$skill->name}}
+                </div>
+                <div class="col-5">
+                    {!!nl2br($skill->description)!!}
+                </div>
+                <div class="col-2">
+                    @if($skill->is_simple_skill)
+                        Simple Skill
+                    @elseif($skill->is_crafting_skill)
+                        Crafting Skill
+                    @else
+                        Normal Skill
+                    @endif
+                </div>
+                <div class="col-2">
+                    <a href="{{route('skills.show', $skill)}}" class="btn btn-outline-primary ml-1">View Ranks</a>
+                </div>
+            </div>
         @endif
     @endforeach
     @is_admin

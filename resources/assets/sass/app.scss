@@ -11,3 +11,8 @@
 .linebreaks{
     white-space: pre-wrap;
 }
+
+input[type="checkbox"]{
+    height: ($font-size-base * 1.5);
+    width: ($font-size-base * 1.5);
+}

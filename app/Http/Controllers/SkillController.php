@@ -57,6 +57,6 @@ class SkillController extends Controller
     }
 
     public function destroy(Skill $skill){
-        return back()->with('error', 'Skills cannot be deleted');
+        return back()->with('error', 'Skills cannot currently be deleted');
     }
 }
