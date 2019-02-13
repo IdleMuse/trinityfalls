@@ -4,6 +4,9 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
         <h1>{{$skill->name}}</h1>
     </div>
+    <div class="row p-3">
+        {!!nl2br($skill->description)!!}
+    </div>
     <div class="row pt-3 pb-2">
         <div class="col-1 h6">Rank</div>
         <div class="col-1 h6">XP Cost</div>

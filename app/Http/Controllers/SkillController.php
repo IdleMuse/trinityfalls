@@ -85,7 +85,7 @@ class SkillController extends Controller
 
         $skill->fill($fields)->save();
 
-        return redirect()->route('skills.show',$skill)->with('success', 'Skill updated!');
+        return redirect()->route('skills.index')->with('success', 'Skill updated!');
     }
 
     public function destroy(Skill $skill){
