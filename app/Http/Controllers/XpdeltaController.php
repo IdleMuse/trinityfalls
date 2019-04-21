@@ -34,7 +34,7 @@ class XpdeltaController extends Controller
                     Xpdelta::create([
                         "character_id" => $character->id,
                         "delta" => $data['delta'],
-                        "is_approved" => true,
+                        "is_approved" => Auth::user()->is_admin,
                         "note" => $data['note']
                     ]);
                 }
@@ -45,14 +45,23 @@ class XpdeltaController extends Controller
         } else {
             $data = $request->validate([
                 "character_id" => "required|integer|exists:characters,id",
-                "delta" => "required|integer",
                 "is_approved" => "sometimes|boolean",
                 "purchaseable_type" => "sometimes|nullable|string",
                 "purchaseable_id" => "sometimes|nullable|integer|min:1",
-                "note" => "sometimes|nullable|string"
+                "note" => "sometimes|nullable|string",
+                "delta" => "required_without_all:purchaseable_type,purchaseable_id|integer",
             ]);
 
-            $xpdelta = Xpdelta::create($data);
+            $data['is_approved'] = $data['is_approved'] && Auth::user()->is_admin;
+
+            if(!isset($data["delta"])){
+                $data["delta"] = -9999;
+                $xpdelta = Xpdelta::create($data);
+                $xpdelta->delta = $xpdelta->purchaseable->xp_cost;
+                $xpdelta->save();
+            } else {
+                $xpdelta = Xpdelta::create($data);
+            }
 
             return back()->with('success', 'XP '.($xpdelta->delta > 0 ? 'added' : 'spent').'!');
         }

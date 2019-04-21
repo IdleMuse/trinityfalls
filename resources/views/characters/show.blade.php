@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 px-4 border-right">
+        <div class="col-4 px-4 border-right text-muted">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Personal Health Pool</label>
                 <div class="col-sm-8 col-form-label font-weight-bold">
@@ -81,8 +81,8 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
             <a class="nav-item nav-link" id="nav-downtimes-tab" data-toggle="tab" href="#nav-downtimes" role="tab" aria-controls="nav-downtimes" aria-selected="false">Downtimes</a>
+            <a class="nav-item nav-link" id="nav-abilities-tab" data-toggle="tab" href="#nav-abilities" role="tab" aria-controls="nav-abilities" aria-selected="false">Abilities</a>
             <a class="nav-item nav-link" id="nav-xp-tab" data-toggle="tab" href="#nav-xp" role="tab" aria-controls="nav-xp" aria-selected="false">XP</a>
-            <a class="nav-item nav-link disabled" id="nav-abilities-tab" data-toggle="tab" href="#nav-abilities" role="tab" aria-controls="nav-abilities" aria-selected="false" disabled>Abilities</a>
             <a class="nav-item nav-link disabled" id="nav-inventory-tab" data-toggle="tab" href="#nav-inventory" role="tab" aria-controls="nav-inventory" aria-selected="false" disabled>Inventory</a>
         </div>
     </nav>
@@ -176,15 +176,44 @@
                 </tbody>
             </table>
         </div>
+        <div class="tab-pane fade py-4" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
+            <div class="row">
+                <div class="col-5">
+                    <h4>Skills</h4>
+                    <hr>
+                    @foreach($character->skills as $skill)
+                        <div class="">
+                            <p><span class="h5">{{$skill->name}}</span> — {{$skill->description}}</p>
+                            <table class="table table-borderless">
+                                <tbody>
+                                    @foreach($skill->skillranks as $skillrank)
+                                        <th class="border-right" style="width: 40px;">{{$skillrank->rank}}</th>
+                                        <td style="padding: 0.75rem 1.5rem;">{{$skillrank->description}}
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
+                    @can('update',"App\Xpdelta")
+                        <button class="btn btn-primary mt-4" data-toggle="modal" data-target="#add-skill-modal">Add new Skill</button>
+                    @endcan
+                </div>
+                <div class="col-5">
+                    <h4 class="text-muted">Aptitudes</h4>
+                    <span class="text-muted">(Work in Progress)</span>
+                    <hr>
+                </div>
+            </div>
+        </div>
         <div class="tab-pane fade py-4" id="nav-xp" role="tabpanel" aria-labelledby="nav-xp-tab">
-            <table class="table" style="width: 60%">
+            <table class="table" style="width: 100%">
                 <thead>
                     <tr>
-                        <th style="width: 20%">Submitted at</th>
+                        <th style="width: 15%">Submitted at</th>
                         <th style="width: 10%">XP Change</th>
-                        <th style="width: 20%">Pays for</th>
-                        <th style="width: 30%">Note</th>
-                        <th style="width: 20%">Actions</th>
+                        <th style="width: 15%">Pays for</th>
+                        <th style="">Note</th>
+                        <th style="width: 10%">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -192,7 +221,7 @@
                         <tr>
                             <td>{{$xp->created_at->format('d/m/y - g:ia')}}</td>
                             <td class="font-weight-bold">{{$xp->delta}}</td>
-                            <td>{!! !empty($xp->purchaseable) ? $purchaseable : "<i class='text-muted'>(n/a)</i>" !!}</td>
+                            <td>{!! !empty($xp->purchaseable) ? $xp->purchaseable->name : "<i class='text-muted'>(n/a)</i>" !!}</td>
                             <td>{!!nl2br($xp->note)!!}</td>
                             <td>
                                 @can('delete', $xp)
@@ -214,6 +243,7 @@
     @include('characters.modals.edit-status')
     @include('characters.modals.edit-wave')
     @include('characters.modals.add-xp')
+    @include('characters.modals.add-skill')
 @endsection
 
 @push('scripts')

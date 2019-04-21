@@ -20,6 +20,24 @@ class Character extends Model
         return $this->hasMany('App\Xpdelta');
     }
 
+    public function getSkillranksAttribute(){
+        return Skillrank::whereIn("id", $this->xpdeltas()->where('purchaseable_type', 'App\Skillrank')->where('is_approved', true)->pluck('purchaseable_id'))->with('skill')->get();
+    }
+
+    public function getSkillsAttribute(){
+        return $this->skillranks->groupBy('skill_id')->map(function($skillranks, $skillid){
+            $skill = Skill::find($skillid);
+            $skill->skillranks = $skillranks->sortBy('rank')->keyBy('rank');
+            return $skill;
+        });
+    }
+
+    public function getUnlearnedSkillsAtFirstRankAttribute(){
+        return Skill::all()->diff($this->skills)->map(function($skill){
+            return $skill->skillranks()->orderBy('rank')->with('skill')->first();
+        });
+    }
+
     public function getXpAttribute(){
         return $this->xpdeltas()->sum('delta');
     }
