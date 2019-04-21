@@ -42,6 +42,6 @@ class SkillrankController extends Controller
     }
 
     public function destroy(Skillrank $skillrank){
-        return back()->with('error', 'Skills cannot currently be deleted');
+        return back()->with('errors', 'Skills cannot currently be deleted');
     }
 }
