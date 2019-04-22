@@ -50,6 +50,10 @@ class Character extends Model
         return -($this->xpdeltas()->where('delta','<',0)->sum('delta'));
     }
 
+    public function xpForSkillRank(Skillrank $skillrank){
+        return $this->xpdeltas()->where('purchaseable_type',"App\Skillrank")->where('purchaseable_id', $skillrank->id)->first();
+    }
+
     public function getIsActiveAttribute(){
         return $this->status == "active";
     }
