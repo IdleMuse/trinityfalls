@@ -41,4 +41,5 @@
     @include('characters.modals.edit-wave')
     @include('characters.modals.add-xp')
     @include('characters.modals.add-skill')
+    @include('characters.modals.rankup-skill')
 @endsection

@@ -14,8 +14,12 @@
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{route('home')}}">{{config('app.name','Laravel')}}</a>
-        <span class="navbar-text">{{env('APP_DEBUG',false) && !empty($errors) && count($errors)>0 ? $errors : ""}}</span>
-        {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
+        @if(env('APP_DEBUG',false) && !empty($errors) && count($errors)>0)
+            <div class="alert alert-danger fade show" role="alert" style="padding: 0.25rem 1rem; margin: 0;">{{$errors}}</div>
+        @endif
+        @if(Session::has('success'))
+            <div class="alert alert-success fade show" role="alert" style="padding: 0.25rem 1rem; margin: 0;">{{Session::get('success')}}</div>
+        @endif
         @auth
             <ul class="navbar-nav flex-row px-2">
                 <li class="nav-item text-nowrap px-3">
@@ -57,6 +61,10 @@
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
         feather.replace();
+
+        setTimeout(function(){
+            $('.alert-success').alert('close');
+        }, 1500);
 
         function ucfirst(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);

@@ -12,6 +12,7 @@
                 <input type="hidden" name="character_id" value="{{$character->id}}">
                 <input type="hidden" name="purchaseable_type" value="App\Skillrank">
                 <input type="hidden" name="is_approved" value=1>
+                <input type="hidden" name="inverter" value=-1>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="skill-field" class="col-form-label">Skill:</label>

@@ -63,6 +63,11 @@ class XpdeltaController extends Controller
                 $xpdelta = Xpdelta::create($data);
             }
 
+            if($request->has('inverter')){
+                $xpdelta->delta = -abs($xpdelta->delta);
+                $xpdelta->save();
+            }
+
             return back()->with('success', 'XP '.($xpdelta->delta > 0 ? 'added' : 'spent').'!');
         }
     }

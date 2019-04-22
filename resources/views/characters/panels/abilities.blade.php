@@ -10,25 +10,28 @@
                         @php $highestrank = 0; @endphp
                         @foreach($skill->skillranks as $skillrank)
                             @php $highestrank = max($highestrank, $skillrank->rank); @endphp
-                            <th class="border-right" style="width: 40px;">{{$skillrank->rank}}</th>
-                            <td class="pl-4">{{$skillrank->description}}</td>
-                            @can('delete',"App\Xpdelta")
-                                <td style="width: 50px; padding:0">
-                                    @if($loop->last)
-                                        <form action="{{route('xpdeltas.destroy', $character->xpForSkillRank($skillrank))}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><span data-feather="trash-2"></span></button>
-                                        </form>
-                                    @endif
-                                </td>
-                            @endcan
+                            <tr>
+                                <th class="border-right" style="width: 40px;">{{$skillrank->rank}}</th>
+                                <td class="pl-4">{{$skillrank->description}}</td>
+                                @can('delete',"App\Xpdelta")
+                                    <td style="width: 50px; padding:0">
+                                        @if($loop->last)
+                                            <form action="{{route('xpdeltas.destroy', $character->xpForSkillRank($skillrank))}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger"><span data-feather="trash-2"></span></button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                @endcan
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
                 @can('update',"App\Xpdelta")
-                    @if(!empty($skill->skillranks()->where('rank',$highestrank+1)))
-                        <button class="btn btn-primary mb-4" data-toggle="modal" data-target="#add-skill-modal">Add next Rank</button>
+                    @php $nextrank = $skill->skillranks()->where('rank',$highestrank+1)->first(); @endphp
+                    @if(!empty($nextrank))
+                        <button class="btn btn-primary mb-4 rankup-skill" data-rankid="{{$nextrank->id}}" data-cost="{{$nextrank->xp_cost}}">Add next Rank</button>
                     @endif
                 @endcan
             </div>
@@ -45,3 +48,17 @@
         <hr>
     </div>
 </div>
+
+@push('scripts')
+    <script type="text/javascript">
+    $(function(){
+        $('.rankup-skill').click(function(e){
+            var rankid = $(this).data('rankid');
+            var cost = $(this).data('cost');
+            $('#rankup-skillrank-id-field').val(rankid);
+            $('#rankup-override-xpcost-field').val(cost);
+            $('#rankup-skill-modal').modal('show');
+        });
+    });
+    </script>
+@endpush
