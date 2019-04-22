@@ -19,9 +19,14 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('users', 'UserController')->only(['index', 'store', 'edit', 'update']);
     Route::resource('characters', 'CharacterController')->only(['index', 'store', 'show', 'update']);
 
+    Route::resource('xpdeltas', 'XpdeltaController')->only(['index', 'store', 'update', 'destroy']);
+
     Route::resource('downtimeperiods', 'DowntimeperiodController')->only(['index', 'store', 'show', 'edit', 'update']);;
     Route::resource('downtimes', 'DowntimeController')->only(['store', 'show', 'edit']);
     Route::resource('downtimepoints', 'DowntimepointController')->only(['store', 'show', 'edit', 'update', 'destroy']);
+
+    Route::resource('skills', 'SkillController')->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::resource('skillranks', 'SkillrankController')->only(['store', 'update', 'destroy']);
 });
 
 // only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

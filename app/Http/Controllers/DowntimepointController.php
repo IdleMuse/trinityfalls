@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Downtimepoint;
+use App\Downtimeperiod;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -18,8 +19,8 @@ class DowntimepointController extends Controller
         ]);
 
         $data['order'] = Downtimepoint::where('downtime_id',$data['downtime_id'])->max('order') + 1;
-        if($data['order'] > 10){
-            return back()->with('error', 'Max Downtime points reached');
+        if($data['order'] > 10 && !Auth::user()->can('create',Downtimeperiod::class)){
+            return back()->with('errors', 'Max Downtime points reached');
         }
 
         $downtimepoint = Downtimepoint::create($data);

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
-        <h1>Downtime for {{$downtime->character->name}}</h1>
+        <h1>Downtime for <a href="{{route('characters.show',$downtime->character)}}">{{$downtime->character->name}}</a></h1>
         <span>Downtime opened at: {{$downtime->downtimeperiod->opens_at->format('d/m/y - g:ia')}}</span>
     </div>
     <div class="container py-4">

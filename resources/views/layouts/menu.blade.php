@@ -28,6 +28,20 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ Request::is('xpdeltas') || Request::is('xpdeltas/*') ? 'active' : '' }}" href="{{route('xpdeltas.index')}}">
+                    <span data-feather="zap"></span>
+                    XP
+                </a>
+            </li>
+            <hr class="w-100">
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('skills') || Request::is('skills/*') ? 'active' : '' }}" href="{{route('skills.index')}}">
+                    <span data-feather="award"></span>
+                    Skills
+                </a>
+            </li>
+            <hr class="w-100">
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('menulinks') ? 'active' : '' }}" href="{{route('menulinks.index')}}">
                     <span data-feather="link"></span>
                     Menu Links
@@ -47,6 +61,7 @@
                     </a>
                 @endif
             </li>
+            <hr class="w-100">
         @endis_admin
         @foreach(App\Menulink::all() as $menulink)
             <li class="nav-item">

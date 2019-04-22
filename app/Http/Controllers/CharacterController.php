@@ -47,7 +47,7 @@ class CharacterController extends Controller
         })->each(function($dtp) use ($character){
             $dtp->downtime = $character->downtimes()->where('downtimeperiod_id', $dtp->id)->first();
         });
-        
+
         return view('characters.show')->with([
             'character' => $character,
             'statuses' => $statuses,
