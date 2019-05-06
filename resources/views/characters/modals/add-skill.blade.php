@@ -19,9 +19,12 @@
                         <select class="form-control" id="skill-field" name="purchaseable_id" required>
                             <option value=false selected disabled>Select a Skill</option>
                             @foreach($character->unlearnedSkillsAtFirstRank as $skillrank)
-                                <option value="{{$skillrank->id}}" data-cost="{{$skillrank->xp_cost}}">{{$skillrank->skill->name}}</option>
+                                <option value="{{$skillrank->id}}" data-cost="{{$skillrank->xp_cost}}" data-simple={{$skillrank->skill->is_simple_skill}}>{{$skillrank->skill->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group variant-group" hidden>
+                        <input type="text" class="form-control variant-input" name="variant" placeholder="Enter variant">
                     </div>
                     <div class="form-group">
                         <label for="delta-field" class="col-form-label">Override XP cost:</label>
@@ -46,7 +49,17 @@
     $(function(){
         $('#skill-field').on('change', function(e){
             var cost = $(this).children("option:selected").data('cost');
+            var is_simple = $(this).children("option:selected").data('simple');
             $('#override-xpcost-field').val(cost);
+
+            if(is_simple){
+                $('.variant-group').attr('hidden', false);
+                $('.variant-input').attr('required', true);
+                $('.variant-group').show();
+            } else {
+                $('.variant-input').attr('required', false);
+                $('.variant-group').hide();
+            }
         });
     });
     </script>

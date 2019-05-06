@@ -15,4 +15,8 @@ class Xpdelta extends Model
     public function purchaseable(){
         return $this->morphTo('purchaseable');
     }
+
+    public function downtimepoint(){
+        return $this->hasOne('App\Downtimepoint');
+    }
 }

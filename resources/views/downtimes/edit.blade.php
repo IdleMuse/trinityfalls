@@ -22,6 +22,24 @@
                             <label for="text-{{$point->order}}" class="col-form-label">Action:</label>
                             <textarea class="form-control fieldinput" rows="4" id="text-{{$point->order}}" name="text">{{$point->text}}</textarea>
                         </div>
+                        <div class="form-group row">
+                            <label for="xpspend-{{$point->order}}" class="col-2 col-form-label text-right">Spend XP:</label>
+                            <div class="col-3 px-2">
+                                <select class="form-control xpspend xpspend-{{$point->order}}" name="purchaseable_id">
+                                    <option value="0">None</option>
+                                    @foreach($downtime->character->nextSkillRanks as $skillrank)
+                                        <option value={{$skillrank->id}} data-simple={{$skillrank->skill->is_simple_skill}}>{{$skillrank->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-3 px-2">
+                                <input type="text" class="form-control variant" name="variant" placeholder="Enter variant" hidden>
+                            </div>
+                            <div class="col-3 text-center">
+                                <button type="submit" class="btn btn-primary">Approve</button>
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </div>
+                        </div>
                         @if($showresponses)
                             <div class="form-group">
                                 <label for="response-{{$point->order}}" class="col-form-label">Response:</label>
@@ -61,6 +79,27 @@
                var dtp = $(this).parents('.downtimepoint');
                $('.new-downtime-point').hide();
                $('.delete-link').hide();
+               $('.submit-button').removeClass('btn-primary');
+               $('.submit-button').addClass('btn-danger');
+               dtp.find('.submit-button').removeClass('btn-danger');
+               dtp.find('.submit-button').addClass('btn-primary');
+               dtp.find('.submit-button').attr('hidden', false);
+               dtp.find('.delete-link').show();
+           });
+
+           $('.xpspend').on('change',function(e){
+               var is_simple = $(this).children("option:selected").data('simple');
+               var dtp = $(this).parents('.downtimepoint');
+               var variant = dtp.find('.variant');
+               if(is_simple){
+                   variant.attr('hidden', false);
+                   variant.attr('required', true);
+                   variant.show();
+               } else {
+                   variant.attr('required', false);
+                   variant.hide();
+               }
+
                $('.submit-button').removeClass('btn-primary');
                $('.submit-button').addClass('btn-danger');
                dtp.find('.submit-button').removeClass('btn-danger');
