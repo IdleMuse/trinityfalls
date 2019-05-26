@@ -21,21 +21,40 @@ class Character extends Model
     }
 
     public function getSkillranksAttribute(){
-        return Skillrank::whereIn("id", $this->xpdeltas()->where('purchaseable_type', 'App\Skillrank')->where('is_approved', true)->pluck('purchaseable_id'))->with('skill')->get();
+        return $this->xpdeltas()
+            ->where('purchaseable_type', 'App\Skillrank')
+            ->where('is_approved', true)
+            ->get()
+            ->map(function($xpdelta){
+                $skillrank = $xpdelta->purchaseable;
+                if($skillrank->skill->is_simple_skill){
+                    $skillrank->variant = $xpdelta->variant;
+                }
+                return $skillrank;
+            });
     }
 
     public function getSkillsAttribute(){
         return $this->skillranks->groupBy('skill_id')->map(function($skillranks, $skillid){
             $skill = Skill::find($skillid);
-            $skill->skillranks = $skillranks->sortBy('rank')->keyBy('rank');
+            $skill->skillranks = $skillranks->sortBy('rank');
             return $skill;
         });
     }
 
     public function getUnlearnedSkillsAtFirstRankAttribute(){
-        return Skill::all()->diff($this->skills)->map(function($skill){
+        return Skill::all()->diff($this->skills->reject(function($skill){return $skill->is_simple_skill;}))->map(function($skill){
             return $skill->skillranks()->orderBy('rank')->with('skill')->first();
         });
+    }
+
+    public function getNextSkillRanksAttribute(){
+        return $this->skills->map(function($skill){
+            return $skill->skillranks()->where('rank',$skill->skillranks->max('rank')+1)->first();
+        })
+        ->filter(function($skillrank){return !empty($skillrank);})
+        ->merge($this->unlearnedSkillsAtFirstRank)
+        ->sortByDesc('rank');
     }
 
     public function getXpAttribute(){

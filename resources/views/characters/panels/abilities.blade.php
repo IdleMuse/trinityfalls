@@ -4,7 +4,7 @@
         <hr>
         @foreach($character->skills as $skill)
             <div class="">
-                <p><span class="h5">{{$skill->name}}</span> — {{$skill->description}}</p>
+                <p><span class="h5">{{$skill->name}}</span> — {!!nl2br($skill->description)!!}</p>
                 <table class="table table-borderless">
                     <tbody>
                         @php $highestrank = 0; @endphp
@@ -12,10 +12,16 @@
                             @php $highestrank = max($highestrank, $skillrank->rank); @endphp
                             <tr>
                                 <th class="border-right" style="width: 40px;">{{$skillrank->rank}}</th>
-                                <td class="pl-4">{{$skillrank->description}}</td>
-                                @can('create',"App\Downtimeperiod")
+                                <td class="pl-4">
+                                    @if($skill->is_simple_skill)
+                                        {{$skillrank->variant}}
+                                    @else
+                                        {!!nl2br($skillrank->description)!!}
+                                    @endif
+                                </td>
+                                @can('delete',$character->xpForSkillRank($skillrank))
                                     <td style="width: 50px; padding:0">
-                                        @if($loop->last)
+                                        @if($loop->last || $skill->is_simple_skill)
                                             <form action="{{route('xpdeltas.destroy', $character->xpForSkillRank($skillrank))}}" method="post">
                                                 @csrf
                                                 @method('DELETE')

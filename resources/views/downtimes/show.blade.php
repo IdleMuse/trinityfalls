@@ -13,6 +13,18 @@
                 </div>
                 <div class="card-body">
                     <p>{!!nl2br($point->text)!!}</p>
+                    @if(!empty($point->xpdelta))
+                        <hr>
+                        @if($point->xpdelta->is_approved)
+                            <p class="text-center">{{abs($point->xpdelta->delta)}} XP spent on <b>{{$point->xpdelta->purchaseable->name}}</b> — {!!nl2br($point->xpdelta->purchaseable->description)!!}</p>
+                        @else
+                            <p class="text-center text-muted"><i>XP spend on {{$point->xpdelta->purchaseable->name}} pending</i></p>
+                        @endif
+                    @endif
+                    @if(!empty($point->xp_spend_rejected))
+                        <hr>
+                        <p class="text-center text-danger">{{$point->xp_spend_rejected}}</p>
+                    @endif
                     @if($showresponses)
                         <hr>
                         Response:<br>

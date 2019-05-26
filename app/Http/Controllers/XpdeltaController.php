@@ -50,6 +50,7 @@ class XpdeltaController extends Controller
                 "purchaseable_id" => "sometimes|nullable|integer|min:1",
                 "note" => "sometimes|nullable|string",
                 "delta" => "required_without_all:purchaseable_type,purchaseable_id|integer",
+                "variant" => "sometimes|nullable|string"
             ]);
 
             $data['is_approved'] = $data['is_approved'] && Auth::user()->is_admin;
@@ -83,7 +84,11 @@ class XpdeltaController extends Controller
     }
 
     public function destroy(Xpdelta $xpdelta){
+        if(!empty($xpdelta->downtimepoint) && !empty($xpdelta->purchaseable)){
+            $xpdelta->downtimepoint->xp_spend_rejected = "XP Spend on ".$xpdelta->purchaseable->name." rejected.";
+            $xpdelta->downtimepoint->save();
+        }
         $xpdelta->delete();
-        return back()->with('success', 'Deleted!');
+        return back()->with('success', 'Deleted');
     }
 }

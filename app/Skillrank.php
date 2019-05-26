@@ -9,7 +9,15 @@ class Skillrank extends Model
     protected $guarded = ['id'];
 
     public function getNameAttribute(){
-        return $this->skill->name." ".$this->rank;
+        if($this->skill->is_simple_skill){
+            if(empty($this->variant)){
+                return $this->skill->name;
+            } else {
+                return $this->skill->name.": ".$this->variant;
+            }
+        } else {
+            return $this->skill->name." ".$this->rank;
+        }
     }
 
     public function skill(){

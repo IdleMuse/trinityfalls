@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Downtimepoint;
 use App\Downtimeperiod;
+use App\Skillrank;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -37,7 +38,7 @@ class DowntimepointController extends Controller
     public function edit(Downtimepoint $downtimepoint){
         return redirect()->route('downtimes.edit',[
             "downtime" => $downtimepoint->downtime,
-            "point" => $downtimepoint->order
+            "point" => $downtimepoint->order            
         ]);
     }
 
@@ -51,6 +52,20 @@ class DowntimepointController extends Controller
         if(Auth::user()->is_admin && $request->has('response')){
             $downtimepoint->response = $data['response'];
         }
+
+        if($downtimepoint->xp_spend_rejected == null && $downtimepoint->xpdelta_id == null && $request->has('purchaseable_id') && $request->purchaseable_id != 0){
+            $skillrank = Skillrank::findOrFail($request->purchaseable_id);
+            $delta = $downtimepoint->character->xpdeltas()->create([
+                'delta' => -$skillrank->xp_cost,
+                'is_approved' => Auth::user()->is_admin,
+                'purchaseable_type' => "App\Skillrank",
+                'purchaseable_id' => $skillrank->id,
+                'note' => "Requested in Downtime opening ".$downtimepoint->downtimeperiod->opens_at,
+                'variant' => $request->variant,
+            ]);
+            $downtimepoint->xpdelta_id = $delta->id;
+        }
+
         $downtimepoint->save();
 
         return back()->with('success', 'Downtime point updated');
