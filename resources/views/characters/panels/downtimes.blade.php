@@ -17,12 +17,16 @@
                 <td class="font-weight-bold">{{!empty($period->downtime) ? $period->downtime->downtimepoints()->count() : ""}}</td>
                 <td>
                     @if(empty($period->downtime))
-                        <form action="{{route('downtimes.store')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="character_id" value="{{$character->id}}">
-                            <input type="hidden" name="downtimeperiod_id" value="{{$period->id}}">
-                            <button type="submit" class="btn btn-primary">Create Downtime</button>
-                        </form>
+                        @if($period->status == "open" || Auth::user()->is_admin)
+                            <form action="{{route('downtimes.store')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="character_id" value="{{$character->id}}">
+                                <input type="hidden" name="downtimeperiod_id" value="{{$period->id}}">
+                                <button type="submit" class="btn btn-primary">Create Downtime</button>
+                            </form>
+                        @else
+                            Downtime is closed
+                        @endif
                     @else
                         <a href="{{route('downtimes.show', $period->downtime)}}" class="btn btn-primary">View Downtime</a>
                     @endif
