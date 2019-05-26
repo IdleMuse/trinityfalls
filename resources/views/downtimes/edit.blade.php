@@ -22,23 +22,48 @@
                             <label for="text-{{$point->order}}" class="col-form-label">Action:</label>
                             <textarea class="form-control fieldinput" rows="4" id="text-{{$point->order}}" name="text">{{$point->text}}</textarea>
                         </div>
-                        <div class="form-group row">
-                            <label for="xpspend-{{$point->order}}" class="col-2 col-form-label text-right">Spend XP:</label>
-                            <div class="col-3 px-2">
-                                <select class="form-control xpspend xpspend-{{$point->order}}" name="purchaseable_id">
-                                    <option value="0">None</option>
-                                    @foreach($downtime->character->nextSkillRanks as $skillrank)
-                                        <option value={{$skillrank->id}} data-simple={{$skillrank->skill->is_simple_skill}}>{{$skillrank->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-3 px-2">
-                                <input type="text" class="form-control variant" name="variant" placeholder="Enter variant" hidden>
-                            </div>
-                            <div class="col-3 text-center">
-                                <button type="submit" class="btn btn-primary">Approve</button>
-                                <button type="submit" class="btn btn-danger">Reject</button>
-                            </div>
+                        <div class="form-group d-flex justify-content-center">
+                            @if(!empty($point->xp_spend_rejected))
+                                <span class="col-form-label d-inline-block text-danger">{{$point->xp_spend_rejected}}</span>
+                            @else
+                                <label for="xpspend-{{$point->order}}" class="pl-4 col-form-label text-right">Spend XP:</label>
+                                <div class="px-2 w-25">
+                                    @if(empty($point->xpdelta))
+                                        <select class="form-control xpspend xpspend-{{$point->order}}" name="purchaseable_id">
+                                            <option value="0">None</option>
+                                            @foreach($available_skillranks_to_buy as $skillrank)
+                                                <option value={{$skillrank->id}} data-simple={{$skillrank->skill->is_simple_skill}}>{{$skillrank->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    @else
+                                        <select class="form-control disabled" disabled>
+                                            <option selected>{{$point->xpdelta->purchaseable->name}}</option>
+                                        </select>
+                                    @endif
+                                </div>
+                                <div class="px-2 w-25" hidden>
+                                    <input type="text" class="form-control variant" name="variant" placeholder="Enter variant">
+                                </div>
+                                @if(!empty($point->xpdelta))
+                                    <div class="px-2 text-center">
+                                        @if($point->xpdelta->is_approved)
+                                            @can('update', $point->xpdelta)
+                                                <button class="btn btn-primary disabled" disabled>Approved</button>
+                                                <button class="btn btn-danger reject-xp">Undo Approval and Reject</button>
+                                            @else
+                                                <b class="col-form-label d-inline-block text-primary">Approved!</b>
+                                            @endcan
+                                        @else
+                                            @can('update', $point->xpdelta)
+                                                <button class="btn btn-primary approve-xp">Approve</button>
+                                                <button class="btn btn-danger reject-xp">Reject</button>
+                                            @else
+                                                <i class="col-form-label text-muted d-inline-block">Pending Approval</i>
+                                            @endcan
+                                        @endif
+                                    </div>
+                                @endif
+                            @endif
                         </div>
                         @if($showresponses)
                             <div class="form-group">
@@ -52,6 +77,17 @@
                             </div>
                         </div>
                     </form>
+                    @if(!empty($point->xpdelta) && Auth::user()->can('update', $point->xpdelta))
+                        <form action="{{route('xpdeltas.destroy', $point->xpdelta)}}" method="post" class="reject-xp-form">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                        <form action="{{route('xpdeltas.update', $point->xpdelta)}}" method="post" class="approve-xp-form">
+                            @csrf
+                            @method('PATCH')
+                            <input type="hidden" name="is_approved" value="1">
+                        </form>
+                    @endif
                 </div>
             </div>
         @endforeach
@@ -92,12 +128,12 @@
                var dtp = $(this).parents('.downtimepoint');
                var variant = dtp.find('.variant');
                if(is_simple){
-                   variant.attr('hidden', false);
+                   variant.parent().attr('hidden', false);
                    variant.attr('required', true);
-                   variant.show();
+                   variant.parent().show();
                } else {
                    variant.attr('required', false);
-                   variant.hide();
+                   variant.parent().hide();
                }
 
                $('.submit-button').removeClass('btn-primary');
@@ -106,6 +142,20 @@
                dtp.find('.submit-button').addClass('btn-primary');
                dtp.find('.submit-button').attr('hidden', false);
                dtp.find('.delete-link').show();
+           });
+
+           $('.reject-xp').click(function(e){
+               e.preventDefault();
+               var dtp = $(this).parents('.downtimepoint');
+               var form = dtp.find('.reject-xp-form');
+               form.submit();
+           });
+
+           $('.approve-xp').click(function(e){
+               e.preventDefault();
+               var dtp = $(this).parents('.downtimepoint');
+               var form = dtp.find('.approve-xp-form');
+               form.submit();
            });
         });
     </script>

@@ -32,10 +32,17 @@ class DowntimeController extends Controller
     }
 
     public function edit(Downtime $downtime){
-        $showresponses = Auth::user()->is_admin;
+        $xp_available = $downtime->character->xp;
+        $available_skillranks_to_buy = Auth::user()->is_admin ?
+            $downtime->character->nextSkillRanks
+            : $downtime->character->nextSkillRanks->filter(function($sr) use ($xp_available){
+                return $sr->xp_cost <= $xp_available;
+            });
+
         return view('downtimes.edit')->with([
             'downtime' => $downtime,
-            'showresponses' => $showresponses
+            'showresponses' => Auth::user()->is_admin,
+            'available_skillranks_to_buy' => $available_skillranks_to_buy
         ]);
     }
 }

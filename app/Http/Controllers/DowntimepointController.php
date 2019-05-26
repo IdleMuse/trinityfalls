@@ -38,7 +38,7 @@ class DowntimepointController extends Controller
     public function edit(Downtimepoint $downtimepoint){
         return redirect()->route('downtimes.edit',[
             "downtime" => $downtimepoint->downtime,
-            "point" => $downtimepoint->order
+            "point" => $downtimepoint->order            
         ]);
     }
 
@@ -53,7 +53,7 @@ class DowntimepointController extends Controller
             $downtimepoint->response = $data['response'];
         }
 
-        if($request->has('purchaseable_id') && $request->purchaseable_id != 0){
+        if($downtimepoint->xp_spend_rejected == null && $downtimepoint->xpdelta_id == null && $request->has('purchaseable_id') && $request->purchaseable_id != 0){
             $skillrank = Skillrank::findOrFail($request->purchaseable_id);
             $delta = $downtimepoint->character->xpdeltas()->create([
                 'delta' => -$skillrank->xp_cost,
