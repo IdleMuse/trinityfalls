@@ -21,4 +21,12 @@ class Aptitude extends Model
     public function aptituderanks(){
         return $this->hasMany('App\Aptituderank');
     }
+
+    public function getTierAttribute(){
+        if(empty($this->aptitude_id)){
+            return 1;
+        } else {
+            return $this->aptitude->tier + 1;
+        }
+    }
 }

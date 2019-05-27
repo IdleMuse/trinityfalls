@@ -52,7 +52,8 @@ class CharacterController extends Controller
             'character' => $character,
             'statuses' => $statuses,
             'waves' => $waves,
-            'periods' => $downtimepoints
+            'periods' => $downtimepoints,
+            'next_aptituderanks' => $character->nextAptituderanks
         ]);
     }
 
@@ -69,6 +70,21 @@ class CharacterController extends Controller
         ]);
 
         $character->fill($fields)->save();
+
+        if(Auth::user()->is_admin){
+            $aptfields = $request->validate([
+                "add_aptituderank" => 'sometimes|integer|exists:aptituderanks,id',
+                "remove_aptituderank" => 'sometimes|integer|exists:aptituderanks,id'
+            ]);
+
+            if(!empty($aptfields['add_aptituderank'])){
+                $character->aptituderanks()->attach($aptfields['add_aptituderank']);
+            }
+
+            if(!empty($aptfields['remove_aptituderank'])){
+                $character->aptituderanks()->detach($aptfields['remove_aptituderank']);
+            }
+        }
 
         return back()->with('success', 'Character updated');
     }
