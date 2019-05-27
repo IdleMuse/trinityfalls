@@ -65,6 +65,9 @@
                                 @endif
                             @endif
                         </div>
+                        @if(!empty($point->xpdelta) && !$point->xpdelta->is_approved && $downtime->character->xp < $point->xpdelta->delta)
+                            <p class="text-center text-danger font-weight-bold">{{$downtime->character->name}} cannot afford this purchase.</p>
+                        @endif
                         @if($showresponses)
                             <div class="form-group">
                                 <label for="response-{{$point->order}}" class="col-form-label">Response:</label>
