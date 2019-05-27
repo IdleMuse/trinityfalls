@@ -27,6 +27,9 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('skills', 'SkillController')->only(['index', 'store', 'show', 'update', 'destroy']);
     Route::resource('skillranks', 'SkillrankController')->only(['store', 'update', 'destroy']);
+
+    Route::resource('aptitudes', 'AptitudeController')->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::resource('aptituderanks', 'AptituderankController')->only(['store', 'update', 'destroy']);
 });
 
 // only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

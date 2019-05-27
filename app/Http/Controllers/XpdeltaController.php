@@ -15,7 +15,8 @@ class XpdeltaController extends Controller
 
     public function index(){
         return view('xp.index')->with([
-            'characters' => Character::where('status', 'active')->get()
+            'characters' => Character::where('status', 'active')->get(),
+            'xpdeltas' => Xpdelta::whereNotNull('purchaseable_id')->latest()->limit(10)->get()
         ]);
     }
 

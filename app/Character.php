@@ -20,6 +20,36 @@ class Character extends Model
         return $this->hasMany('App\Xpdelta');
     }
 
+    public function aptituderanks(){
+        return $this->belongsToMany('App\Aptituderank')->withTimestamps();
+    }
+
+    public function getAptitudesAttribute(){
+        return $this->aptituderanks->groupBy('aptitude_id')->map(function($aptituderanks, $aptitudeid){
+            $aptitude = Aptitude::findOrFail($aptitudeid);
+            $aptitude->aptituderanks = $aptituderanks->sortBy('rank');
+            return $aptitude;
+        });
+    }
+
+    public function getNextAptituderanksAttribute(){
+        if(empty($this->aptituderanks) || $this->aptituderanks->isEmpty()){
+            return Aptitude::whereNull('aptitude_id')->get()->map(function($aptitude){
+                return $aptitude->aptituderanks()->where('rank', 1)->first();
+            });
+        } else {
+            return $this->aptitudes->sortByDesc('tier')->first()->aptituderanks->sortByDesc('rank')->first()->nextRanks;
+        }
+    }
+
+    public function getHhpAttribute(){
+        return $this->aptituderanks()->sum('hhp');
+    }
+
+    public function getBiofocusAttribute(){
+        return $this->aptituderanks()->sum('biofocus');
+    }
+
     public function getSkillranksAttribute(){
         return $this->xpdeltas()
             ->where('purchaseable_type', 'App\Skillrank')
@@ -36,7 +66,7 @@ class Character extends Model
 
     public function getSkillsAttribute(){
         return $this->skillranks->groupBy('skill_id')->map(function($skillranks, $skillid){
-            $skill = Skill::find($skillid);
+            $skill = Skill::findOrFail($skillid);
             $skill->skillranks = $skillranks->sortBy('rank');
             return $skill;
         });
