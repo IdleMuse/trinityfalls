@@ -59,9 +59,15 @@
                         @foreach($aptitude->aptituderanks->sortBy('rank') as $aptituderank)
                             <tr>
                                 <th class="border-right" style="width: 40px;">{{$aptituderank->rank}}</th>
+                                <th class="border-right" style="width: 40px;">
+                                    {{$aptituderank->hhp != 0 ? sprintf("%+d",$aptituderank->hhp)."HHP" : ""}}
+                                    {!!$aptituderank->hhp != 0 && $aptituderank->biofocus != 0 ? "<br>" : ""!!}
+                                    {{$aptituderank->biofocus != 0 ? sprintf("%+d",$aptituderank->biofocus)."BF" : ""}}
+                                </th>
                                 <td class="pl-4">
                                     {!!nl2br($aptituderank->description)!!}
                                 </td>
+                                <th class="border-left" style="width: 55px;">{{$aptituderank->bf_cost}} BF</th>
                                 @is_admin
                                     <td style="width: 50px; padding:0">
                                         @if($loop->last && $loop->parent->last)

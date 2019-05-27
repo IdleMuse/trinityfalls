@@ -24,23 +24,23 @@
         </div>
     </div>
 </div>
-<div class="col-4 px-4 border-right text-muted">
+<div class="col-4 px-4 border-right">
     <div class="form-group row">
         <label class="col-sm-4 col-form-label">Personal Health Pool</label>
         <div class="col-sm-8 col-form-label font-weight-bold">
-            (Work in Progress)
+            1
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-4 col-form-label">Heroic Hit Points</label>
         <div class="col-sm-8 col-form-label font-weight-bold">
-            (Work in Progress)
+            {{$character->hhp}}
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-4 col-form-label">Biofocus</label>
         <div class="col-sm-8 col-form-label font-weight-bold">
-            (Work in Progress)
+            {{$character->biofocus}}
         </div>
     </div>
 </div>

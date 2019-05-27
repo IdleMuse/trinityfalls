@@ -42,6 +42,14 @@ class Character extends Model
         }
     }
 
+    public function getHhpAttribute(){
+        return $this->aptituderanks()->sum('hhp');
+    }
+
+    public function getBiofocusAttribute(){
+        return $this->aptituderanks()->sum('biofocus');
+    }
+
     public function getSkillranksAttribute(){
         return $this->xpdeltas()
             ->where('purchaseable_type', 'App\Skillrank')
