@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('aptitudes', 'AptitudeController')->only(['index', 'store', 'show', 'update', 'destroy']);
     Route::resource('aptituderanks', 'AptituderankController')->only(['store', 'update', 'destroy']);
+
+    Route::resource('inventoryitems', 'InventoryitemController')->only(['store', 'update', 'destroy']);
 });
 
 // only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

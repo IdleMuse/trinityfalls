@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         "App\Skillrank" => "App\Policies\SkillrankPolicy",
         "App\Aptitude" => "App\Policies\AptitudePolicy",
         "App\Aptituderank" => "App\Policies\AptituderankPolicy",
+        "App\Inventoryitem" => "App\Policies\InventoryitemPolicy"
     ];
 
     /**

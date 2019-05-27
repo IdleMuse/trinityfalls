@@ -16,9 +16,9 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
             <a class="nav-item nav-link" id="nav-downtimes-tab" data-toggle="tab" href="#nav-downtimes" role="tab" aria-controls="nav-downtimes" aria-selected="false">Downtimes</a>
+            <a class="nav-item nav-link" id="nav-inventory-tab" data-toggle="tab" href="#nav-inventory" role="tab" aria-controls="nav-inventory" aria-selected="false">Inventory</a>
             <a class="nav-item nav-link" id="nav-abilities-tab" data-toggle="tab" href="#nav-abilities" role="tab" aria-controls="nav-abilities" aria-selected="false">Abilities</a>
             <a class="nav-item nav-link" id="nav-xp-tab" data-toggle="tab" href="#nav-xp" role="tab" aria-controls="nav-xp" aria-selected="false">XP</a>
-            <a class="nav-item nav-link disabled" id="nav-inventory-tab" data-toggle="tab" href="#nav-inventory" role="tab" aria-controls="nav-inventory" aria-selected="false" disabled>Inventory</a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -27,6 +27,9 @@
         </div>
         <div class="tab-pane fade py-4" id="nav-downtimes" role="tabpanel" aria-labelledby="nav-downtimes-tab">
             @include('characters.panels.downtimes')
+        </div>
+        <div class="tab-pane fade py-4" id="nav-inventory" role="tabpanel" aria-labelledby="nav-inventory-tab">
+            @include('characters.panels.inventory')
         </div>
         <div class="tab-pane fade py-4" id="nav-abilities" role="tabpanel" aria-labelledby="nav-abilities-tab">
             @include('characters.panels.abilities')
