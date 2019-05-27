@@ -14,7 +14,7 @@
     @if(Auth::check())
         <style>
             body, .sidebar-sticky, .form-control, .card{
-                font-family: {{ !empty(Auth::user()->font) ? Auth::user()->font." !important" : "default" }};
+                font-family: {!! !empty(Auth::user()->font) ? Auth::user()->font." !important" : "default" !!};
                 background-color: {{ !empty(Auth::user()->background_colour) ? Auth::user()->background_colour." !important" : "default" }};
             }
         </style>

@@ -28,4 +28,10 @@
             Kairos Technologies was offering something different - a new, untested but unique technology that claimed to offer not only the best chance to survive the coming apocalypse, but to skip the worst of the grim years that would inevitably follow in its aftermath: Cryo-Stasis. The facility known as Trinity Falls was risky, experimental - but perhaps your best hope.
         </p>
     </div>
+    <div class="pb-2 border-top pt-3" style="font-family: 'Libre Baskerville' !important;">
+        <h3>Libre Baskerville</h3>
+        <p>
+            Somehow, you secured your place - through money, contacts or one of their lucky lotteries. You descended into the Cryo-Chambers and followed the routine instructions, stepping into your pod and wondering if you would ever again emerge from that darkness.
+        </p>
+    </div>
 @endsection

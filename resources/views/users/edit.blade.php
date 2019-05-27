@@ -59,6 +59,7 @@
                             <option value="Roboto" {{$user->font == "Roboto" ? "selected" : ""}}>Roboto</option>
                             <option value="OpenDyslexicRegular" {{$user->font == "OpenDyslexicRegular" ? "selected" : ""}}>OpenDyslexic</option>
                             <option value="Eulexia" {{$user->font == "Eulexia" ? "selected" : ""}}>Eulexia</option>
+                            <option value="'Libre Baskerville'" {{$user->font == "'Libre Baskerville'" ? "selected" : ""}}>Libre Baskerville</option>
                         </select>
                     </div>
                 </div>
