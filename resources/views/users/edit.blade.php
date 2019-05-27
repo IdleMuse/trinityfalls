@@ -51,6 +51,28 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="role-field" class="col-sm-3 col-form-label">Typeface <a href="{{route('fontpreview')}}">(previews)</a></label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="font-field" name="font">
+                            <option value="">Roboto Condensed (default)</option>
+                            <option value="Roboto" {{$user->font == "Roboto" ? "selected" : ""}}>Roboto</option>
+                            <option value="OpenDyslexicRegular" {{$user->font == "OpenDyslexicRegular" ? "selected" : ""}}>OpenDyslexic</option>
+                            <option value="Eulexia" {{$user->font == "Eulexia" ? "selected" : ""}}>Eulexia</option>
+                            <option value="'Libre Baskerville'" {{$user->font == "'Libre Baskerville'" ? "selected" : ""}}>Libre Baskerville</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="role-field" class="col-sm-3 col-form-label">Background Colour</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="colour-field" name="background_colour">
+                            <option value="">White (default)</option>
+                            <option value="#FFF8DC" {{$user->background_colour == "#FFF8DC" ? "selected" : ""}}>Cream</option>
+                            <option value="#e0efff" {{$user->background_colour == "#e0efff" ? "selected" : ""}}>Blue</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>

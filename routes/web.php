@@ -10,6 +10,8 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
+Route::get('/font-preview', 'SiteNavigationController@fontpreview')->name('fontpreview');
+
 Route::middleware(['auth'])->group(function(){
 
     Route::get('/', 'SiteNavigationController@index')->name('home');
@@ -30,6 +32,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('aptitudes', 'AptitudeController')->only(['index', 'store', 'show', 'update', 'destroy']);
     Route::resource('aptituderanks', 'AptituderankController')->only(['store', 'update', 'destroy']);
+
+    Route::resource('inventoryitems', 'InventoryitemController')->only(['store', 'update', 'destroy']);
 });
 
 // only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);

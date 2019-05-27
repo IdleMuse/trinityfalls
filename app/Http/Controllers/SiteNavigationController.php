@@ -22,4 +22,8 @@ class SiteNavigationController extends Controller
             'count' => $count
         ]);
     }
+
+    public function fontpreview(){
+        return view('fontpreview');
+    }
 }

@@ -16,6 +16,10 @@ class Character extends Model
         return $this->hasMany('App\Downtime');
     }
 
+    public function inventoryitems(){
+        return $this->hasMany('App\Inventoryitem');
+    }
+
     public function xpdeltas(){
         return $this->hasMany('App\Xpdelta');
     }

@@ -9,7 +9,16 @@
     <title>{{config('app.name','Laravel')}}</title>
 
     <!-- Styles -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="https://fontlibrary.org/face/opendyslexic" type="text/css" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" type="text/css" rel="stylesheet">
+    @if(Auth::check())
+        <style>
+            body, .sidebar-sticky, .form-control, .card{
+                font-family: {!! !empty(Auth::user()->font) ? Auth::user()->font." !important" : "default" !!};
+                background-color: {{ !empty(Auth::user()->background_colour) ? Auth::user()->background_colour." !important" : "default" }};
+            }
+        </style>
+    @endif
 </head>
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
