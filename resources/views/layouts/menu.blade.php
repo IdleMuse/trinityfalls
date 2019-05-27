@@ -35,6 +35,12 @@
             </li>
             <hr class="w-100">
             <li class="nav-item">
+                <a class="nav-link {{ Request::is('aptitudes') || Request::is('aptitudes/*') ? 'active' : '' }}" href="{{route('aptitudes.index')}}">
+                    <span data-feather="star"></span>
+                    Aptitudes
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Request::is('skills') || Request::is('skills/*') ? 'active' : '' }}" href="{{route('skills.index')}}">
                     <span data-feather="award"></span>
                     Skills

@@ -21,6 +21,8 @@ class AuthServiceProvider extends ServiceProvider
         "App\Xpdelta" => "App\Policies\XpdeltaPolicy",
         "App\Skill" => "App\Policies\SkillPolicy",
         "App\Skillrank" => "App\Policies\SkillrankPolicy",
+        "App\Aptitude" => "App\Policies\AptitudePolicy",
+        "App\Aptituderank" => "App\Policies\AptituderankPolicy",
     ];
 
     /**

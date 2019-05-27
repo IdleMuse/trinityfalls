@@ -20,6 +20,10 @@ class Character extends Model
         return $this->hasMany('App\Xpdelta');
     }
 
+    public function aptituderanks(){
+        return $this->belongsToMany('App\Aptituderank');
+    }
+
     public function getSkillranksAttribute(){
         return $this->xpdeltas()
             ->where('purchaseable_type', 'App\Skillrank')
