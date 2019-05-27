@@ -1,4 +1,36 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);/*!
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);@import url(https://fonts.googleapis.com/css?family=Roboto);@font-face {
+  font-family: 'Eulexia';
+  src: url("/css/eulexia/Eulexia-Regular.eot");
+  src: url("/css/eulexia/Eulexia-Regular.eot?#iefix") format("embedded-opentype"), url("/css/eulexia/Eulexia-Regular.woff2") format("woff2"), url("/css/eulexia/Eulexia-Regular.woff") format("woff"), url("/css/eulexia/Eulexia-Regular.ttf") format("truetype"), url("/css/eulexia/Eulexia-Regular.svg#Eulexia-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Eulexia';
+  src: url("/css/eulexia/Eulexia-Italic.eot");
+  src: url("/css/eulexia/Eulexia-Italic.eot?#iefix") format("embedded-opentype"), url("/css/eulexia/Eulexia-Italic.woff2") format("woff2"), url("/css/eulexia/Eulexia-Italic.woff") format("woff"), url("/css/eulexia/Eulexia-Italic.ttf") format("truetype"), url("/css/eulexia/Eulexia-Italic.svg#Eulexia-Italic") format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Eulexia';
+  src: url("/css/eulexia/Eulexia-BoldItalic.eot");
+  src: url("/css/eulexia/Eulexia-BoldItalic.eot?#iefix") format("embedded-opentype"), url("/css/eulexia/Eulexia-BoldItalic.woff2") format("woff2"), url("/css/eulexia/Eulexia-BoldItalic.woff") format("woff"), url("/css/eulexia/Eulexia-BoldItalic.ttf") format("truetype"), url("/css/eulexia/Eulexia-BoldItalic.svg#Eulexia-BoldItalic") format("svg");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Eulexia';
+  src: url("/css/eulexia/Eulexia-Bold.eot");
+  src: url("/css/eulexia/Eulexia-Bold.eot?#iefix") format("embedded-opentype"), url("/css/eulexia/Eulexia-Bold.woff2") format("woff2"), url("/css/eulexia/Eulexia-Bold.woff") format("woff"), url("/css/eulexia/Eulexia-Bold.ttf") format("truetype"), url("/css/eulexia/Eulexia-Bold.svg#Eulexia-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.

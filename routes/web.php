@@ -10,6 +10,8 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
+Route::get('/font-preview', 'SiteNavigationController@fontpreview')->name('fontpreview');
+
 Route::middleware(['auth'])->group(function(){
 
     Route::get('/', 'SiteNavigationController@index')->name('home');

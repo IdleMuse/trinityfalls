@@ -56,7 +56,9 @@ class UserController extends Controller
         $rules = [
             "name" => 'sometimes|string',
             "email" => 'sometimes|email|unique:users,email,'.$user->id.',id',
-            "role" => 'sometimes|string|exists:roles,key'
+            "role" => 'sometimes|string|exists:roles,key',
+            "font" => 'sometimes|nullable|string',
+            "background_colour" => 'sometimes|nullable|string'
         ];
         if($request->filled('password')){
             $rules["password"] = 'sometimes|string|min:8';

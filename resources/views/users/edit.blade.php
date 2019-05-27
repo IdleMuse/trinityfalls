@@ -51,6 +51,17 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="role-field" class="col-sm-3 col-form-label">Typeface <a href="{{route('fontpreview')}}">(previews)</a></label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="font-field" name="font">
+                            <option value="">Roboto Condensed (default)</option>
+                            <option value="Roboto" {{$user->font == "Roboto" ? "selected" : ""}}>Roboto</option>
+                            <option value="OpenDyslexicRegular" {{$user->font == "OpenDyslexicRegular" ? "selected" : ""}}>OpenDyslexic</option>
+                            <option value="Eulexia" {{$user->font == "Eulexia" ? "selected" : ""}}>Eulexia</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>

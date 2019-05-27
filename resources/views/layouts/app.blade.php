@@ -9,9 +9,12 @@
     <title>{{config('app.name','Laravel')}}</title>
 
     <!-- Styles -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="https://fontlibrary.org/face/opendyslexic" type="text/css" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" type="text/css" rel="stylesheet">
 </head>
-<body>
+<body style='
+    font-family: {{ (Auth::check() && !empty(Auth::user()->font)) ? Auth::user()->font." !important;" : "" }}
+'>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{route('home')}}">{{config('app.name','Laravel')}}</a>
         @if(env('APP_DEBUG',false) && !empty($errors) && count($errors)>0)
